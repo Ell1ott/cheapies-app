@@ -69,17 +69,19 @@ const iconColor = "rgba(255, 255, 255, 0.6)";
 export default function HomeScreen() {
 	const [DATA, setDATA] = useState<Item[]>([]);
 
+	const [category, setCategory] = useState("deals");
+
 	useEffect(() => {
-		fetchData().then((data) => {
+		fetchData(category).then((data) => {
 			console.log(data);
 			console.log(data[0].tags);
 			setDATA(data);
 		});
-	}, []);
+	}, [category]);
 
 	return (
 		<>
-			<Header />
+			<Header onCategoryChange={setCategory} />
 			<ThemedView>
 				<SafeAreaView>
 					{DATA.length === 0 ? (

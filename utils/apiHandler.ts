@@ -1,7 +1,7 @@
 import HTMLparser from "fast-html-parser";
 
-export const fetchData = async () => {
-	const response = await fetch("https://www.cheapies.nz/cat/education");
+export const fetchData = async (url: string) => {
+	const response = await fetch("https://www.cheapies.nz/" + url);
 	const html = await response.text();
 	const root = HTMLparser.parse(html);
 	const items = root.querySelectorAll(".title");

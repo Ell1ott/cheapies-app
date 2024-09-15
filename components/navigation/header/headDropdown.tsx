@@ -11,7 +11,11 @@ const dropDownData = [
 	{ label: "Comps", value: "competitions" },
 ];
 
-export const DropdownComponent = () => {
+export const DropdownComponent = ({
+	onCategoryChange,
+}: {
+	onCategoryChange: (value: string) => void;
+}) => {
 	const [value, setValue] = useState<string | null>("deals");
 	const [isFocus, setIsFocus] = useState(false);
 
@@ -64,6 +68,7 @@ export const DropdownComponent = () => {
 				onBlur={() => setIsFocus(false)}
 				onChange={(item) => {
 					setValue(item.value);
+					onCategoryChange(item.value);
 					setIsFocus(false);
 				}}
 			/>
