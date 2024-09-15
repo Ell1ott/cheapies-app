@@ -6,9 +6,8 @@ import { Dropdown } from "react-native-element-dropdown";
 
 const dropDownData = [
 	{ label: "Deals", value: "deals" },
-	{ label: "Vouchers", value: "vouchers" },
 	{ label: "Freebies", value: "freebies" },
-	{ label: "Comps", value: "competitions" },
+	{ label: "Comps", value: "competition" },
 ];
 
 export const DropdownComponent = ({

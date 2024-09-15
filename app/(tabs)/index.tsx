@@ -1,10 +1,17 @@
-import { Text, StyleSheet, SafeAreaView, View, Pressable } from "react-native";
+import {
+	Text,
+	StyleSheet,
+	SafeAreaView,
+	View,
+	Pressable,
+	Image,
+} from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { useEffect, useState } from "react";
 import { Header } from "@/components/navigation/header/header";
-import { fetchData } from "@/utils/ApiHandler";
+import { fetchData } from "@/utils/apiHandler";
 
 const generateData = (count: number) => {
 	const data = [];
@@ -28,8 +35,40 @@ const tagColors = {
 	longrunning: "bg-slate-600",
 };
 
-const Item = ({ item }: { item: Item }) => (
-	<Pressable android_ripple={rippleConfig} className="p-5 px-[1.5rem]">
+const ItemWithImage = ({ item }: { item: Item }) => (
+	<Pressable
+		className="flex flex-row gap-2 p-5 px-[1.5rem] bg-neutral-900"
+		android_ripple={rippleConfig}
+	>
+		<View className="flex-1">
+			<ItemContent item={item} />
+		</View>
+		<Image
+			source={{ uri: item.image }}
+			className="aspect-square rounded-lg overflow-hidden max-w-[5.5rem]"
+		/>
+	</Pressable>
+);
+
+const Item = ({ item }: { item: Item }) => {
+	return item.image ? (
+		<ItemWithImage item={item} />
+	) : (
+		<SimpleItem item={item} />
+	);
+};
+
+const SimpleItem = ({ item }: { item: Item }) => (
+	<Pressable
+		android_ripple={rippleConfig}
+		className="p-5 px-[1.5rem] bg-neutral-900"
+	>
+		<ItemContent item={item} />
+	</Pressable>
+);
+
+const ItemContent = ({ item }: { item: Item }) => (
+	<>
 		<Text>
 			{item.tags.map((tag) => (
 				<View
@@ -49,8 +88,10 @@ const Item = ({ item }: { item: Item }) => (
 
 			<ThemedText className="font-semibold text-xl">{item.title}</ThemedText>
 		</Text>
-		<ThemedText className="">{item.description}</ThemedText>
-	</Pressable>
+		{item.description && (
+			<ThemedText className="">{item.description}</ThemedText>
+		)}
+	</>
 );
 
 const sep = () => {
@@ -62,6 +103,7 @@ type Item = {
 	title: string;
 	description: string;
 	tags: { type: keyof typeof tagColors; text: string }[];
+	image: string;
 };
 
 const iconColor = "rgba(255, 255, 255, 0.6)";
