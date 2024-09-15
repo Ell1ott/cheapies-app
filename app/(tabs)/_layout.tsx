@@ -24,7 +24,7 @@ export default function TabLayout() {
 			}}
 		>
 			<Tabs.Screen
-				name="fe"
+				name="explore"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon
@@ -35,7 +35,7 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="Basic"
+				name="search"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon icon={faSearch} color={color} />
@@ -44,7 +44,7 @@ export default function TabLayout() {
 			/>
 
 			<Tabs.Screen
-				name="index"
+				name="saved"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon
@@ -55,7 +55,7 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="explore"
+				name="settings"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon icon={faGear} color={color} />
