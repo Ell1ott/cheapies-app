@@ -1,34 +1,9 @@
-import {
-	Text,
-	Image,
-	StyleSheet,
-	Platform,
-	SafeAreaView,
-	ScrollView,
-	FlatList,
-	View,
-	Touchable,
-	TouchableOpacity,
-	Pressable,
-	TouchableHighlight,
-} from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-	faBars,
-	faChevronDown,
-	faMagnifyingGlass,
-	faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { Text, StyleSheet, SafeAreaView, View, Pressable } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { Dropdown } from "react-native-element-dropdown";
 import HTMLparser from "fast-html-parser";
 import { useEffect, useState } from "react";
-import { useThemeColor } from "@/hooks/useThemeColor";
-import { Colors } from "@/constants/Colors";
 import { Header } from "@/components/navigation/header/header";
 
 const generateData = (count: number) => {
