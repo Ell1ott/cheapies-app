@@ -6,6 +6,7 @@ import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import {
 	faCompass as faCompassSolid,
+	faBookmark as faBookmarkSolid,
 	faGear,
 	faSearch,
 } from "@fortawesome/free-solid-svg-icons";
@@ -26,7 +27,10 @@ export default function TabLayout() {
 				name="fe"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon icon={faCompass} color={color} />
+						<TabBarIcon
+							icon={focused ? faCompassSolid : faCompass}
+							color={color}
+						/>
 					),
 				}}
 			/>
@@ -43,7 +47,10 @@ export default function TabLayout() {
 				name="index"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon icon={faBookmark} color={color} />
+						<TabBarIcon
+							icon={focused ? faBookmarkSolid : faBookmark}
+							color={color}
+						/>
 					),
 				}}
 			/>
