@@ -29,6 +29,7 @@ import HTMLparser from "fast-html-parser";
 import { useEffect, useState } from "react";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { Colors } from "@/constants/Colors";
+import { Header } from "@/components/navigation/header/header";
 
 const generateData = (count: number) => {
 	const data = [];
@@ -120,73 +121,6 @@ const fetchData = async () => {
 
 const iconColor = "rgba(255, 255, 255, 0.6)";
 
-const dropDownData = [
-	{ label: "Deals", value: "deals" },
-	{ label: "Vouchers", value: "vouchers" },
-	{ label: "Freebies", value: "freebies" },
-	{ label: "Comps", value: "competitions" },
-];
-
-const DropdownComponent = () => {
-	const [value, setValue] = useState<string | null>("deals");
-	const [isFocus, setIsFocus] = useState(false);
-
-	const renderLabel = () => {
-		if (value || isFocus) {
-			return <Text style={isFocus && { color: "blue" }}></Text>;
-		}
-		return null;
-	};
-
-	const backgroundColor = useThemeColor(
-		{ light: Colors.light.background, dark: Colors.dark.background },
-		"background"
-	);
-
-	return (
-		<View className="flex-1">
-			<Dropdown
-				style={{
-					overflow: "visible",
-					width: 200,
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "flex-start",
-					alignItems: "center",
-				}}
-				containerStyle={{
-					width: 200,
-					backgroundColor: "hsl(360, 0%, 20%)",
-					borderColor: "transparent",
-					marginTop: 10,
-				}}
-				activeColor="hsl(360, 0%, 30%)"
-				itemTextStyle={{ color: "white", width: "auto", overflow: "visible" }}
-				data={dropDownData}
-				selectedTextStyle={{
-					color: "white",
-
-					width: "auto",
-					fontSize: 18,
-					overflow: "visible",
-					flex: 0,
-				}}
-				maxHeight={300}
-				labelField="label"
-				valueField="value"
-				placeholder={!isFocus ? "Select item" : "..."}
-				value={value}
-				onFocus={() => setIsFocus(true)}
-				onBlur={() => setIsFocus(false)}
-				onChange={(item) => {
-					setValue(item.value);
-					setIsFocus(false);
-				}}
-			/>
-		</View>
-	);
-};
-
 export default function HomeScreen() {
 	const [DATA, setDATA] = useState<Item[]>([]);
 
@@ -200,30 +134,7 @@ export default function HomeScreen() {
 
 	return (
 		<>
-			<View className="flex flex-row gap-4 p-4 pt-12 px-[1.5rem] bg-neutral-800 items-center">
-				<FontAwesomeIcon
-					icon={faBars}
-					size={23}
-					color="rgba(255, 255, 255, 0.6)"
-				/>
-				<DropdownComponent />
-				{/* <Pressable className="flex flex-row items-center gap-1.5">
-					<ThemedText className="text-xl">Deals</ThemedText>
-					<FontAwesomeIcon
-						size={12}
-						icon={faChevronDown}
-						color={iconColor}
-					></FontAwesomeIcon>
-				</Pressable> */}
-				<View className="flex-1"></View>
-				<View className="aspect-square bg-neutral-500 self-stretch pt-[7px] pl-[3.5px] rounded-full overflow-hidden">
-					<FontAwesomeIcon
-						icon={faUser}
-						size={20}
-						color="rgba(255, 255, 255, 0.6)"
-					/>
-				</View>
-			</View>
+			<Header />
 			<ThemedView>
 				<SafeAreaView>
 					{DATA.length === 0 ? (
