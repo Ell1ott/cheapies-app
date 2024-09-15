@@ -12,12 +12,20 @@ import {
 	Pressable,
 	TouchableHighlight,
 } from "react-native";
-
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+	faBars,
+	faMagnifyingGlass,
+	faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
+
+import HTMLparser from "fast-html-parser";
+import { useEffect, useState } from "react";
 
 const generateData = (count: number) => {
 	const data = [];
@@ -36,12 +44,33 @@ const rippleConfig = {
 	borderless: false, // Whether the ripple should be bounded or not
 };
 
-const Item = ({ title }: { title: string }) => (
+const tagColors = {
+	expired: "bg-red-500",
+	longrunning: "bg-slate-600",
+};
+
+const Item = ({ item }: { item: Item }) => (
 	<Pressable android_ripple={rippleConfig} className="p-5 px-[1.5rem]">
-		<ThemedText className="font-semibold text-2xl text-red-500">
-			{title}
-		</ThemedText>
-		<ThemedText className="text-xl">This is my own Page</ThemedText>
+		<Text>
+			{item.tags.map((tag) => (
+				<View
+					className="h-full flex flex-1 mt-4 mr-2 rounded-full"
+					key={tag.type}
+				>
+					<ThemedText
+						className={
+							"h-full flex-1 px-2 -mb-[5px] pb-[2px] mr-2 rounded-full capitalize " +
+							tagColors[tag.type]
+						}
+					>
+						{tag.text}
+					</ThemedText>
+				</View>
+			))}
+
+			<ThemedText className="font-semibold text-xl">{item.title}</ThemedText>
+		</Text>
+		<ThemedText className="">{item.description}</ThemedText>
 	</Pressable>
 );
 
@@ -49,19 +78,104 @@ const sep = () => {
 	return <View className="w-full h-[1px] bg-white/10"></View>;
 };
 
+type Item = {
+	id: string;
+	title: string;
+	description: string;
+	tags: { type: keyof typeof tagColors; text: string }[];
+};
+
+const fetchData = async () => {
+	const response = await fetch("https://www.cheapies.nz/cat/education");
+	const html = await response.text();
+	const root = HTMLparser.parse(html);
+	const items = root.querySelectorAll(".title");
+	let descriptons = root.querySelectorAll("dd p");
+	if (descriptons.length === 0) descriptons = root.querySelectorAll(".content");
+	console.log(items.length);
+	console.log(items.length);
+
+	let currentId = 0;
+
+	return items.map((item, index) => {
+		currentId++;
+		const title = item.childNodes.find((node) => node.tagName === "a");
+		console.log(descriptons);
+		console.log(title);
+		return {
+			title: title?.text,
+			id: currentId + "",
+			tags: item
+				.querySelectorAll(".tagger")
+				.map((tag) => ({ type: tag.classNames[1], text: tag.text })),
+			description: descriptons[index].text
+				.replace(/(\r\n|\n|\r)/gm, " ")
+				.replace(/\s{2,}/g, " "),
+		};
+	});
+};
 export default function HomeScreen() {
+	const [DATA, setDATA] = useState<Item[]>([]);
+
+	useEffect(() => {
+		fetchData().then((data) => {
+			console.log(data);
+			console.log(data[0].tags);
+			setDATA(data);
+		});
+	}, []);
+
 	return (
-		<ThemedView>
-			<SafeAreaView>
-				<FlatList
-					className="py-[2rem] pb-[10rem]"
-					data={DATA}
-					renderItem={({ item }) => <Item title={item.title} />}
-					keyExtractor={(item) => item.id}
-					ItemSeparatorComponent={sep}
+		<>
+			<View className="flex flex-row gap-4 p-4 pt-12 px-[1.5rem] bg-neutral-800 items-center">
+				<FontAwesomeIcon
+					icon={faBars}
+					size={23}
+					color="rgba(255, 255, 255, 0.6)"
 				/>
-			</SafeAreaView>
-		</ThemedView>
+				<ThemedText>hello</ThemedText>
+				<View className="flex-1"></View>
+				<ThemedText>hello</ThemedText>
+				<ThemedText>hello</ThemedText>
+				<FontAwesomeIcon
+					icon={faMagnifyingGlass}
+					size={23}
+					color="rgba(255, 255, 255, 0.6)"
+				/>
+				<View className="aspect-square bg-neutral-500 self-stretch pt-[7px] pl-[3.5px] rounded-full overflow-hidden">
+					<FontAwesomeIcon
+						icon={faUser}
+						size={20}
+						color="rgba(255, 255, 255, 0.6)"
+					/>
+				</View>
+			</View>
+			<ThemedView>
+				<SafeAreaView>
+					{DATA.length === 0 ? (
+						<Text>Loading...</Text>
+					) : (
+						<SwipeListView
+							data={DATA}
+							renderItem={({ item }) => <Item item={item} />}
+							renderHiddenItem={(data, rowMap) => (
+								<View>
+									<Text>Left</Text>
+									<Text>Right</Text>
+								</View>
+							)}
+							keyExtractor={(item) => item.id}
+							ItemSeparatorComponent={sep}
+							leftOpenValue={75}
+							rightOpenValue={-150}
+							previewRowKey={"0"}
+							previewOpenValue={-40}
+							previewOpenDelay={3000}
+						/>
+					)}
+				</SafeAreaView>
+			</ThemedView>
+		</>
 	);
 }
 
