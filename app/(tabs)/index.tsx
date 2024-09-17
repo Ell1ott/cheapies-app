@@ -12,6 +12,14 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import { useEffect, useState } from "react";
 import { Header } from "@/components/navigation/header/header";
 import { fetchData } from "@/utils/apiHandler";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+	faDownload,
+	faDownLong,
+	faPlus,
+	faUpLong,
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 const generateData = (count: number) => {
 	const data = [];
@@ -43,10 +51,30 @@ const ItemWithImage = ({ item }: { item: Item }) => (
 		<View className="flex-1">
 			<ItemContent item={item} />
 		</View>
-		<Image
-			source={{ uri: item.image }}
-			className="aspect-square rounded-lg overflow-hidden max-w-[5.5rem]"
-		/>
+		<View className="max-w-[5.5rem] w-[6rem]">
+			<Image
+				source={{ uri: item.image }}
+				className="aspect-square rounded-lg overflow-hidden"
+			/>
+			<View className="mt-3">
+				{item.upvotes != 0 && (
+					<View className="flex items-center justify-center flex-row">
+						<ThemedText className="font-bold text-2xl text-white">
+							{item.upvotes}
+						</ThemedText>
+						<FontAwesomeIcon icon={faUpLong} color="#4ade80" size={20} />
+					</View>
+				)}
+				{item.downvotes != 0 && (
+					<View className="flex items-center justify-center flex-row">
+						<ThemedText className="font-bold text-2xl text-white">
+							{item.downvotes}
+						</ThemedText>
+						<FontAwesomeIcon icon={faDownLong} color="#ef4444" size={20} />
+					</View>
+				)}
+			</View>
+		</View>
 	</Pressable>
 );
 
@@ -104,6 +132,8 @@ type Item = {
 	description: string;
 	tags: { type: keyof typeof tagColors; text: string }[];
 	image: string;
+	upvotes: number;
+	downvotes: number;
 };
 
 const iconColor = "rgba(255, 255, 255, 0.6)";

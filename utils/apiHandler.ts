@@ -26,6 +26,8 @@ export const fetchData = async (url: string) => {
 					.querySelectorAll(".tagger")
 					.map((tag) => ({ type: tag.classNames[1], text: tag.text })),
 				image: item.querySelector("a img")?.attributes.src,
+				upvotes: item.querySelector(".voteup")?.text ?? 0 + 0 ?? 0,
+				downvotes: item.querySelector(".votedown")?.text ?? 0 + 0 ?? 0,
 				description:
 					url == "competition"
 						? null
