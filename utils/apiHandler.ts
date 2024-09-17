@@ -1,4 +1,4 @@
-import { Item } from "@/components/nodeitem";
+import { Item } from "@/components/NodeItem";
 import HTMLparser from "fast-html-parser";
 
 export const fetchData = async (url: string): Promise<Item[]> => {

@@ -20,6 +20,10 @@ export type Item = {
 const tagColors = {
 	expired: "bg-red-500",
 	longrunning: "bg-slate-600",
+	upcoming: "bg-blue-500",
+	event: "bg-indigo-800",
+	poll: "bg-green-700",
+	resolved: "bg-green-500",
 };
 
 const ItemWithImage = ({ item }: { item: Item }) => (
@@ -41,7 +45,12 @@ const ItemWithImage = ({ item }: { item: Item }) => (
 						<ThemedText className="font-bold text-2xl text-white">
 							{item.upvotes}
 						</ThemedText>
-						<FontAwesomeIcon icon={faUpLong} color="#4ade80" size={20} />
+						<FontAwesomeIcon
+							icon={faUpLong}
+							color="#4ade80"
+							size={20}
+							style={{ opacity: 0.9 }}
+						/>
 					</View>
 				)}
 				{item.downvotes != 0 && (

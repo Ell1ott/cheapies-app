@@ -20,7 +20,7 @@ import {
 	faUpLong,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Item, NodeItem } from "@/components/nodeitem";
+import { Item, NodeItem } from "@/components/NodeItem";
 
 const generateData = (count: number) => {
 	const data = [];
