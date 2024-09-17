@@ -1,12 +1,11 @@
+import { Item } from "@/components/nodeitem";
 import HTMLparser from "fast-html-parser";
 
-export const fetchData = async (url: string) => {
+export const fetchData = async (url: string): Promise<Item[]> => {
 	const response = await fetch("https://www.cheapies.nz/" + url);
 	const html = await response.text();
 	const root = HTMLparser.parse(html);
 	const items = root.querySelectorAll(".node");
-	// let descriptons = root.querySelectorAll("dd p");
-	// if (descriptons.length === 0) descriptons = root.querySelectorAll(".content");
 
 	let currentId = 0;
 
