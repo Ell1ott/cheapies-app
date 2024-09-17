@@ -11,7 +11,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { useEffect, useState } from "react";
 import { Header } from "@/components/navigation/header/header";
-import { fetchData } from "@/utils/apiHandler";
+import { fetchData, getNodeList } from "@/utils/apiHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
 	faDownload,
@@ -47,7 +47,7 @@ export default function HomeScreen() {
 	const [category, setCategory] = useState("deals");
 
 	useEffect(() => {
-		fetchData(category).then((data) => {
+		getNodeList(category).then((data) => {
 			console.log(data);
 			console.log(data[0].tags);
 			setDATA(data);
