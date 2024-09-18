@@ -61,3 +61,8 @@ export const parseNodeInfo = (html: string) => {
 		content: content?.text,
 	};
 };
+
+export const getSearchUrl = (query: string, type: string) => {
+	if (type) query += ` type:${type}`;
+	return `search/node/${encodeURIComponent(query)}`;
+};
