@@ -20,24 +20,9 @@ import {
 	faUpLong,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Item, NodeItem } from "@/components/NodeItem";
-
-const generateData = (count: number) => {
-	const data = [];
-	for (let i = 1; i <= count; i++) {
-		data.push({
-			id: i.toString(),
-			title: `Item ${i}`,
-		});
-	}
-	return data;
-};
-
-const DATA = generateData(20);
-
-const sep = () => {
-	return <View className="w-full h-[1px] bg-white/10"></View>;
-};
+import { Item, NodeItem } from "@/components/Nodes/NodeItem";
+import { DropdownComponent } from "@/components/navigation/header/headDropdown";
+import { NodeList } from "@/components/Nodes/NodeList";
 
 const iconColor = "rgba(255, 255, 255, 0.6)";
 
@@ -56,32 +41,10 @@ export default function HomeScreen() {
 
 	return (
 		<>
-			<Header onCategoryChange={setCategory} />
-			<ThemedView>
-				<SafeAreaView>
-					{DATA.length === 0 ? (
-						<Text>Loading...</Text>
-					) : (
-						<SwipeListView
-							data={DATA}
-							renderItem={({ item }) => <NodeItem item={item} />}
-							renderHiddenItem={(data, rowMap) => (
-								<View>
-									<Text>Left</Text>
-									<Text>Right</Text>
-								</View>
-							)}
-							keyExtractor={(item) => item.id}
-							ItemSeparatorComponent={sep}
-							leftOpenValue={75}
-							rightOpenValue={-150}
-							previewRowKey={"0"}
-							previewOpenValue={-40}
-							previewOpenDelay={3000}
-						/>
-					)}
-				</SafeAreaView>
-			</ThemedView>
+			<Header>
+				<DropdownComponent onCategoryChange={setCategory} />
+			</Header>
+			<NodeList items={DATA} />
 		</>
 	);
 }

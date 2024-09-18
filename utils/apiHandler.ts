@@ -1,4 +1,4 @@
-import { Item } from "@/components/nodeitem";
+import { Item } from "@/components/Nodes/NodeItem";
 import HTMLparser from "fast-html-parser";
 
 export const parseNodeList = (html: string, url: string) => {
@@ -30,8 +30,9 @@ export const parseNodeList = (html: string, url: string) => {
 					url == "competition"
 						? null
 						: description?.text
-								.replace(/(\r\n|\n|\r)/gm, " ")
-								.replace(/\s{2,}/g, " "),
+								.replaceAll(/(\r\n|\n|\r)/gm, " ")
+								.replaceAll(/\s{2,}/g, " ")
+								.replaceAll("…", ""),
 			};
 		})
 		.filter((item) => item);
