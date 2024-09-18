@@ -1,26 +1,8 @@
-import {
-	Text,
-	StyleSheet,
-	SafeAreaView,
-	View,
-	Pressable,
-	Image,
-} from "react-native";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { SwipeListView } from "react-native-swipe-list-view";
+import { StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import { Header } from "@/components/navigation/header/header";
-import { fetchData, getNodeList } from "@/utils/apiHandler";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-	faDownload,
-	faDownLong,
-	faPlus,
-	faUpLong,
-} from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Item, NodeItem } from "@/components/Nodes/NodeItem";
+import { getNodeList } from "@/utils/apiHandler";
+import { Item } from "@/components/Nodes/NodeItem";
 import { DropdownComponent } from "@/components/navigation/header/headDropdown";
 import { NodeList } from "@/components/Nodes/NodeList";
 
