@@ -35,7 +35,7 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="search"
+				name="searchScreen"
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon icon={faSearch} color={color} />

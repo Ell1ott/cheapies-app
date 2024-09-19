@@ -10,11 +10,12 @@ const rippleConfig = {
 export type Item = {
 	id: string;
 	title: string;
-	description: string;
+	description: string | undefined;
 	tags: { type: keyof typeof tagColors; text: string }[];
-	image: string;
+	image: string | undefined;
 	upvotes: number;
 	downvotes: number;
+	url: string;
 };
 
 const tagColors = {
@@ -28,9 +29,12 @@ const tagColors = {
 
 const ItemWithImage = ({ item }: { item: Item }) => (
 	<Pressable
-		className="flex flex-row gap-3 p-5 px-[1.5rem] bg-neutral-900"
+		className="flex flex-row gap-1 p-5 px-[1.5rem] bg-neutral-900"
 		android_ripple={rippleConfig}
 	>
+		<View className="flex-1">
+			<ItemContent item={item} />
+		</View>
 		<View className="max-w-[5.5rem] w-[6rem] pt-2">
 			<Image
 				source={{ uri: item.image }}
@@ -59,9 +63,6 @@ const ItemWithImage = ({ item }: { item: Item }) => (
 					</View>
 				)}
 			</View>
-		</View>
-		<View className="flex-1">
-			<ItemContent item={item} />
 		</View>
 	</Pressable>
 );
