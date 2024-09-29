@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+# Cheapies Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+The **Cheapies Mobile App** is designed to enhance the mobile experience of the Cheapies website, making it easier to browse deals, competitions, directly from your phone. This additionally makes It possible to have features like saving deals and push notifications.
 
-## Get started
+## Features
 
-1. Install dependencies
+### Current Features
+- **Browse Latest Deals:** View the most recent deals and promotions posted on Cheapies.
+- **Competitions Section:** Keep up with the latest giveaways and competitions.
+- **Search Functionality:** Quickly search for deals and products.
 
+### Planned Features
+- **Saved Deals:** Save deals to revisit later.
+- **Notifications:** Get alerts when new deals are posted.
+- **Personalization:** Customize your app experience based on your interests.
+
+## Technologies
+
+- **React Native** with Expo
+- **Fast HTML Parser** to parse website information
+- **NativeWind** for Tailwind CSS-based styling
+
+## Getting Started
+
+To run the project locally:
+
+1. Clone the repository:
+   ```bash
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Run the app using Expo:
    ```bash
-    npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+You can use the app on a mobile device via the Expo Go app or run it in an emulator. **Note:** The web version may not function correctly, as it's not yet optimized.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Contributions
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+We welcome contributions! If you have an idea, find a bug, or want to improve the app, feel free to open a pull request or an issue. All suggestions are appreciated.
 
-## Get a fresh project
+## License
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**. You are free to share and adapt the code, but commercial use is not allowed. For more details, refer to the LICENSE file.
