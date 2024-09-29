@@ -7,7 +7,7 @@ The **Cheapies Mobile App** is designed to enhance the mobile experience of the 
 ### Current Features
 - **Browse Latest Deals:** View the most recent deals and promotions posted on Cheapies.
 - **Competitions Section:** Keep up with the latest giveaways and competitions.
-- **Search Functionality:** Quickly search for deals and products.
+- **Search Functionality:** Quickly search for deals and competitions
 
 ### Planned Features
 - **Saved Deals:** Save deals to revisit later.
