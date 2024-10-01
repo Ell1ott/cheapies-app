@@ -3,6 +3,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { HTMLElement } from "fast-html-parser";
+import { Link, router } from "expo-router";
 const rippleConfig = {
 	color: "rgba(255, 255, 255, 0.1)", // Ripple color
 	borderless: false, // Whether the ripple should be bounded or not
@@ -18,6 +19,7 @@ export type Item = {
 	upvotes: number;
 	downvotes: number;
 	url: string;
+	nodeId: string;
 };
 
 const tagColors = {
@@ -29,44 +31,56 @@ const tagColors = {
 	resolved: "bg-green-500",
 };
 
+function onPress(item: Item) {
+	console.log("Navigating to", item.nodeId);
+	router.navigate({
+		pathname: "/nodes/[node]",
+		params: { node: item.nodeId },
+	});
+}
 const ItemWithImage = ({ item }: { item: Item }) => (
-	<Pressable
-		className="flex flex-row gap-1 p-5 px-[1.5rem] bg-neutral-900"
-		android_ripple={rippleConfig}
+	<Link
+		href={{ pathname: "/(tabs)/nodes/[node]", params: { node: item.nodeId } }}
+		asChild
 	>
-		<View className="flex-1">
-			<ItemContent item={item} />
-		</View>
-		<View className="max-w-[5.5rem] w-[6rem] pt-2">
-			<Image
-				source={{ uri: item.image }}
-				className="aspect-square rounded-lg overflow-hidden"
-			/>
-			<View className="mt-3">
-				{item.upvotes != 0 && (
-					<View className="flex items-center justify-center flex-row">
-						<ThemedText className="font-bold text-2xl text-white">
-							{item.upvotes}
-						</ThemedText>
-						<FontAwesomeIcon
-							icon={faUpLong}
-							color="#4ade80"
-							size={20}
-							style={{ opacity: 0.9 }}
-						/>
-					</View>
-				)}
-				{item.downvotes != 0 && (
-					<View className="flex items-center justify-center flex-row">
-						<ThemedText className="font-bold text-2xl text-white">
-							{item.downvotes}
-						</ThemedText>
-						<FontAwesomeIcon icon={faDownLong} color="#ef4444" size={20} />
-					</View>
-				)}
+		<Pressable
+			className="flex flex-row gap-1 p-5 px-[1.5rem] bg-neutral-900"
+			android_ripple={rippleConfig}
+		>
+			<View className="flex-1">
+				<ItemContent item={item} />
 			</View>
-		</View>
-	</Pressable>
+			<View className="max-w-[5.5rem] w-[6rem] pt-2">
+				<Image
+					source={{ uri: item.image }}
+					className="aspect-square rounded-lg overflow-hidden"
+				/>
+				<View className="mt-3">
+					{item.upvotes != 0 && (
+						<View className="flex items-center justify-center flex-row">
+							<ThemedText className="font-bold text-2xl text-white">
+								{item.upvotes}
+							</ThemedText>
+							<FontAwesomeIcon
+								icon={faUpLong}
+								color="#4ade80"
+								size={20}
+								style={{ opacity: 0.9 }}
+							/>
+						</View>
+					)}
+					{item.downvotes != 0 && (
+						<View className="flex items-center justify-center flex-row">
+							<ThemedText className="font-bold text-2xl text-white">
+								{item.downvotes}
+							</ThemedText>
+							<FontAwesomeIcon icon={faDownLong} color="#ef4444" size={20} />
+						</View>
+					)}
+				</View>
+			</View>
+		</Pressable>
+	</Link>
 );
 
 export const NodeItem = ({ item }: { item: Item }) => {

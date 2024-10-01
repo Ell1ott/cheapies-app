@@ -12,6 +12,8 @@ describe("getNodeList of deals", () => {
 		expect(result[0].url).toBeDefined();
 		expect(result[0].description).toBeDefined();
 		expect(result[0].title).not.toBe("");
+		expect(result[0].nodeId).toBeDefined();
+		expect(result[0].nodeId).not.toBe("");
 		// console.log(result);
 	});
 });

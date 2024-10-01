@@ -39,6 +39,10 @@ const parseNodeItem = (
 		(e) => e.tagName === "a"
 	)?.childNodes;
 
+	const nodeUrl = title?.querySelector("a")?.attributes.href ?? "";
+	console.log(nodeUrl);
+	const nodeId = nodeUrl.split("/").pop() ?? "";
+
 	return {
 		title: title?.childNodes.find((e) => e.tagName === "a")?.text ?? "No title",
 		titleElements: titleElems,
@@ -49,7 +53,7 @@ const parseNodeItem = (
 		image: imageContainer.querySelector("a img")?.attributes.src,
 		upvotes: parseInt(item.querySelector(".voteup")?.text ?? "0"),
 		downvotes: parseInt(item.querySelector(".votedown")?.text ?? "0"),
-		url: title?.querySelector("a")?.attributes.href ?? "",
+		url: nodeUrl,
 		description:
 			url == "competition"
 				? undefined
@@ -57,6 +61,8 @@ const parseNodeItem = (
 						.replaceAll(/(\r\n|\n|\r)/gm, " ")
 						.replaceAll(/\s{2,}/g, " ")
 						.replaceAll("…", ""),
+
+		nodeId: nodeId,
 	};
 };
 

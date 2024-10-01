@@ -12,9 +12,15 @@ export const BlankHeader = ({ children }: { children: React.ReactNode }) => (
 	</View>
 );
 
-export const Header = ({ children }: { children: React.ReactNode }) => (
+export const Header = ({
+	children,
+	leftIcon = <FontAwesomeIcon icon={faBars} size={23} color={iconColor} />,
+}: {
+	children: React.ReactNode;
+	leftIcon?: React.ReactNode;
+}) => (
 	<BlankHeader>
-		<FontAwesomeIcon icon={faBars} size={23} color={iconColor} />
+		{leftIcon}
 
 		{Children.only(children)}
 		{/* <Pressable className="flex flex-row items-center gap-1.5">
