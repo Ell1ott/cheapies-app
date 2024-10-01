@@ -16,7 +16,6 @@ export const parseNodeList = (html: string, url: string) => {
 			const description =
 				item.querySelector(".content") || item.querySelector("dd p");
 			if (!description) return null;
-			console.log(title);
 
 			return parseNodeItem(title, item, item, currentId, description, url);
 		})
@@ -36,8 +35,13 @@ const parseNodeItem = (
 	description: HTMLElement,
 	url: string
 ): Item => {
+	const titleElems = title?.childNodes.find(
+		(e) => e.tagName === "a"
+	)?.childNodes;
+
 	return {
 		title: title?.childNodes.find((e) => e.tagName === "a")?.text ?? "No title",
+		titleElements: titleElems,
 		id: id + "",
 		tags: title
 			.querySelectorAll(".tagger")
@@ -75,8 +79,6 @@ export const parseSearchResults = (html: string, url: string) => {
 			url
 		);
 	});
-
-	console.log(items);
 
 	return items;
 };

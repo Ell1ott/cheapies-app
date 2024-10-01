@@ -2,7 +2,7 @@ import { SafeAreaView, Text, View } from "react-native";
 import { ThemedView } from "../ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Item, NodeItem } from "./NodeItem";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const sep = () => {
 	return <View className="w-full h-[1px] bg-white/10"></View>;
@@ -11,7 +11,7 @@ const sep = () => {
 export const NodeList = ({ items }: { items: Item[] }) => {
 	let listRef: any = null;
 	useEffect(() => {
-		console.log("scrolling to top", listRef);
+		// console.log("scrolling to top", listRef);
 		if (listRef)
 			listRef.scrollToOffset({
 				animated: true,

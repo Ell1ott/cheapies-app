@@ -2,6 +2,7 @@ import { Text, View, Pressable, Image } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
+import { HTMLElement } from "fast-html-parser";
 const rippleConfig = {
 	color: "rgba(255, 255, 255, 0.1)", // Ripple color
 	borderless: false, // Whether the ripple should be bounded or not
@@ -10,6 +11,7 @@ const rippleConfig = {
 export type Item = {
 	id: string;
 	title: string;
+	titleElements: HTMLElement[] | undefined;
 	description: string | undefined;
 	tags: { type: keyof typeof tagColors; text: string }[];
 	image: string | undefined;
@@ -103,10 +105,30 @@ const ItemContent = ({ item }: { item: Item }) => (
 				</View>
 			))}
 
-			<ThemedText className="font-semibold text-xl">{item.title}</ThemedText>
+			<ThemedText className="font-semibold text-xl">
+				{item.titleElements ? TitleRenderer(item.titleElements) : item.title}
+			</ThemedText>
 		</Text>
 		{item.description && (
 			<ThemedText className="">{item.description}</ThemedText>
 		)}
 	</>
 );
+
+const TitleRenderer = (titleElements: HTMLElement[]) => (
+	<>
+		{titleElements.map((e, i) => (
+			<Text key={i}>{TitlePart(e)}</Text>
+		))}
+	</>
+);
+
+const TitlePart = (e: HTMLElement) => {
+	if (e.tagName === undefined) return e.text;
+	if (e.tagName === "em")
+		return <Text className={titleClasses[e.classNames[0]]}>{e.text}</Text>;
+};
+
+const titleClasses = {
+	dollar: "text-red-400",
+};
