@@ -4,6 +4,7 @@ import HTMLparser, { HTMLElement } from "fast-html-parser";
 export const parseNodeList = (html: string, url: string) => {
 	const root = HTMLparser.parse(html);
 	const items = root.querySelectorAll(".node");
+
 	if (url.includes("search")) root;
 
 	let currentId = 0;
@@ -15,7 +16,6 @@ export const parseNodeList = (html: string, url: string) => {
 			if (!title) return null;
 			const description =
 				item.querySelector(".content") || item.querySelector("dd p");
-			if (!description) return null;
 
 			return parseNodeItem(title, item, item, currentId, description, url);
 		})
@@ -32,7 +32,7 @@ const parseNodeItem = (
 	item: HTMLElement,
 	imageContainer: HTMLElement,
 	id: number,
-	description: HTMLElement,
+	description: HTMLElement | undefined | null,
 	url: string
 ): Item => {
 	const titleElems = title?.childNodes.find(
@@ -96,6 +96,7 @@ export const getNodeList = async (url: string): Promise<Item[]> => {
 	// console.log(html);
 	if (url.includes("search")) return parseSearchResults(html, url);
 	const items = parseNodeList(html, url);
+
 	return items;
 };
 
