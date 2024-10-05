@@ -129,7 +129,7 @@ const ItemContent = ({ item }: { item: Item }) => (
 	</>
 );
 
-const TitleRenderer = (titleElements: HTMLElement[]) => (
+export const TitleRenderer = (titleElements: HTMLElement[]) => (
 	<>
 		{titleElements.map((e, i) => (
 			<Text key={i}>{TitlePart(e)}</Text>

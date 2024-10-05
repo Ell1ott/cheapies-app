@@ -1,5 +1,6 @@
 import { Item } from "@/components/Nodes/NodeItem";
 import HTMLparser, { HTMLElement } from "fast-html-parser";
+import { fetchData } from "./dataFetcher";
 
 export const parseNodeList = (html: string, url: string) => {
 	const root = HTMLparser.parse(html);
@@ -40,7 +41,7 @@ const parseNodeItem = (
 	)?.childNodes;
 
 	const nodeUrl = title?.querySelector("a")?.attributes.href ?? "";
-	console.log(nodeUrl);
+
 	const nodeId = nodeUrl.split("/").pop() ?? "";
 
 	return {
@@ -73,8 +74,6 @@ export const parseSearchResults = (html: string, url: string) => {
 	const titles = sr.querySelectorAll(".title");
 	const contents = sr.querySelectorAll("dd");
 
-	console.log(titles.length, contents.length);
-
 	const items = titles.map((title, index) => {
 		return parseNodeItem(
 			title,
@@ -89,15 +88,7 @@ export const parseSearchResults = (html: string, url: string) => {
 	return items;
 };
 
-export const fetchData = async (url: string): Promise<string> => {
-	const response = await fetch("https://www.cheapies.nz/" + url);
-	const html = await response.text();
-
-	return html;
-};
-
 export const getNodeList = async (url: string): Promise<Item[]> => {
-	console.log(url);
 	const html = await fetchData(url);
 	// console.log(html);
 	if (url.includes("search")) return parseSearchResults(html, url);
@@ -115,12 +106,4 @@ export const parseNodeInfo = (html: string) => {
 		title: title?.text,
 		content: content?.text,
 	};
-};
-
-export const getSearchUrl = (
-	query: string,
-	type: string | undefined = undefined
-) => {
-	if (type) query += ` type:${type}`;
-	return `search/node/${encodeURIComponent(query)}`;
 };

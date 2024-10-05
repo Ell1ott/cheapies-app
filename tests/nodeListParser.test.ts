@@ -1,4 +1,5 @@
-import { getNodeList, getSearchUrl } from "@/utils/apiHandler";
+import { getSearchUrl } from "@/utils/apiHandler/dataFetcher";
+import { getNodeList } from "@/utils/apiHandler/nodeListParser";
 
 // /c:/Users/ellio/Dokumenter/GitHub/cheapies-app/tests/apihandler.test.ts
 
@@ -45,7 +46,6 @@ describe("getNodeList of search results", () => {
 describe("getNodeList of competitions", () => {
 	it("should return a list of nodes from the cheapies website", async () => {
 		const result = await getNodeList("competition");
-		console.log(result);
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
 		expect(result[0].url).toBeDefined();
