@@ -7,6 +7,8 @@ export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 		return <Text>{elem.text}</Text>;
 	}
 
+	if (elem.classNames.includes("affdisclosure")) return <></>;
+
 	const children = NodeScreenContentChildren(elem);
 
 	switch (elem.tagName) {
@@ -45,18 +47,13 @@ export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 
 const NodeScreenContentChildren = (elem: HTMLElement) => {
 	if (!elem) return <></>;
-	if (elem.childNodes == undefined) return <></>;
+	if (!elem.childNodes) return <></>;
 
-	if (elem.tagName === "p") {
-	}
-
-	const l = (
+	return (
 		<>
 			{elem.childNodes.map((e, i) => (
 				<NodeScreenContent key={i} elem={e} />
 			))}
 		</>
 	);
-
-	return l;
 };
