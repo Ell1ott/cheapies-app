@@ -47,10 +47,10 @@ export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 
 	if (elem.tagName === "li") {
 		return (
-			<ThemedText className="pb-2">
-				{"\u2022 "}
-				{NodeScreenContentChildren(elem)}
-			</ThemedText>
+			<View className="pb-2 flex flex-row">
+				<ThemedText>{"\u2022 "}</ThemedText>
+				<View>{NodeScreenContentChildren(elem)}</View>
+			</View>
 		);
 	}
 
