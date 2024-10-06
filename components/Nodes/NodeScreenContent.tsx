@@ -7,54 +7,40 @@ export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 		return <Text>{elem.text}</Text>;
 	}
 
-	if (elem.childNodes == undefined) return <></>;
-	if (elem.tagName === "p")
-		return (
-			<ThemedText className="pb-2 text-lg leading-[1.6rem]">
-				{NodeScreenContentChildren(elem)}
-			</ThemedText>
-		);
-	if (elem.tagName === "strong")
-		return (
-			<ThemedText className="font-bold">
-				{NodeScreenContentChildren(elem)}
-			</ThemedText>
-		);
+	const children = NodeScreenContentChildren(elem);
 
-	if (elem.tagName === "a") {
-		return (
-			<ThemedText style={{ color: "#60a5fa" }}>
-				{NodeScreenContentChildren(elem)}
-			</ThemedText>
-		);
+	switch (elem.tagName) {
+		case "blockquote":
+			return (
+				<View className="ml-2 pl-4 my-2 border-l-4 border-blue-400">
+					{children}
+				</View>
+			);
+		case "div":
+			return <View>{children}</View>;
+		case "p":
+			return (
+				<ThemedText className="pb-2 text-lg leading-[1.6rem]">
+					{children}
+				</ThemedText>
+			);
+		case "strong":
+			return <ThemedText className="font-bold">{children}</ThemedText>;
+		case "a":
+			return <ThemedText style={{ color: "#60a5fa" }}>{children}</ThemedText>;
+
+		case "ul":
+			return children;
+		case "li":
+			return (
+				<View className="pb-2 flex flex-row">
+					<ThemedText>{"\u2022 "}</ThemedText>
+					<View>{children}</View>
+				</View>
+			);
+		default:
+			return <></>;
 	}
-
-	if (elem.tagName === "blockquote") {
-		return (
-			<View className="ml-2 pl-4 my-2 border-l-4 border-blue-400">
-				{NodeScreenContentChildren(elem)}
-			</View>
-		);
-	}
-
-	if (elem.tagName === "div") {
-		return <View>{NodeScreenContentChildren(elem)}</View>;
-	}
-
-	if (elem.tagName === "ul") {
-		return NodeScreenContentChildren(elem);
-	}
-
-	if (elem.tagName === "li") {
-		return (
-			<View className="pb-2 flex flex-row">
-				<ThemedText>{"\u2022 "}</ThemedText>
-				<View>{NodeScreenContentChildren(elem)}</View>
-			</View>
-		);
-	}
-
-	return <></>;
 };
 
 const NodeScreenContentChildren = (elem: HTMLElement) => {
