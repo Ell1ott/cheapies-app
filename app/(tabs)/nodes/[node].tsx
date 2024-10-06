@@ -1,15 +1,10 @@
-import { Header } from "@/components/navigation/header/header";
 import { TitleRenderer } from "@/components/Nodes/NodeItem";
 import { NodeScreenContent } from "@/components/Nodes/NodeScreenContent";
 import { ThemedText } from "@/components/ThemedText";
 import { getNodeInfo, NodeInfo } from "@/utils/apiHandler/singleNodeParser";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
-
-const iconColor = "rgba(255, 255, 255, 0.6)";
+import { View, ScrollView } from "react-native";
 
 export default function Page() {
 	const local = useLocalSearchParams();
