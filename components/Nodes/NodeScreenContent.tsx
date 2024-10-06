@@ -1,6 +1,7 @@
 import { HTMLElement } from "fast-html-parser";
 import { ThemedText } from "../ThemedText";
-import { Text, View } from "react-native";
+import { Linking, Text, View } from "react-native";
+import React from "react";
 
 export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 	if (elem.rawText && !elem.tagName) {
@@ -29,7 +30,21 @@ export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 		case "strong":
 			return <ThemedText className="font-bold">{children}</ThemedText>;
 		case "a":
-			return <ThemedText style={{ color: "#60a5fa" }}>{children}</ThemedText>;
+			const [pressed, setPressed] = React.useState(false);
+			return (
+				<ThemedText
+					onPress={() => Linking.openURL(elem.attributes.href)}
+					style={{
+						color: "#60a5fa",
+						textDecorationLine: pressed ? "underline" : "none",
+						backgroundColor: pressed ? "#e5e7eb20" : "transparent",
+					}}
+					onPressIn={() => setPressed(true)}
+					onPressOut={() => setPressed(false)}
+				>
+					{children}
+				</ThemedText>
+			);
 
 		case "ul":
 			return children;

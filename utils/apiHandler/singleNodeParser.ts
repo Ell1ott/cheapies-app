@@ -6,6 +6,7 @@ export interface NodeInfo {
 	titleElements: HTMLElement[];
 	description: string;
 	descriptionElement: HTMLElement;
+	storeURL: string;
 	image: string;
 	upvotes: number;
 	downvotes: number;
@@ -52,16 +53,16 @@ export async function getNodeInfo(id: string): Promise<NodeInfo> {
 	const description = descriptionElem?.text ?? "No description";
 	descriptionElem = removeWhitespace(descriptionElem!!);
 
-	let image =
+	const storeURL =
 		main
 			?.querySelector(".foxshot-container a")
 			?.attributes.title.replace("Go to ", "") ?? "";
-
+	let image = storeURL;
 	if (
 		!(
-			image.endsWith(".jpg") ||
-			image.endsWith(".png") ||
-			image.endsWith(".jpeg")
+			storeURL.endsWith(".jpg") ||
+			storeURL.endsWith(".png") ||
+			storeURL.endsWith(".jpeg")
 		)
 	) {
 		image = main?.querySelector(".foxshot-container img")?.attributes.src ?? "";
@@ -77,6 +78,7 @@ export async function getNodeInfo(id: string): Promise<NodeInfo> {
 		titleElements: titleElem?.childNodes ?? [],
 		description,
 		descriptionElement: descriptionElem!!,
+		storeURL,
 		image,
 		upvotes,
 		downvotes,

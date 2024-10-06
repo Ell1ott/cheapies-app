@@ -29,6 +29,7 @@ const tagColors = {
 	event: "bg-indigo-800",
 	poll: "bg-green-700",
 	resolved: "bg-green-500",
+	targeted: "bg-indigo-600",
 };
 
 function onPress(item: Item) {

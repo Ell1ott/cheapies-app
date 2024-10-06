@@ -4,7 +4,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { getNodeInfo, NodeInfo } from "@/utils/apiHandler/singleNodeParser";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image, Pressable, Linking } from "react-native";
 
 export default function Page() {
 	const local = useLocalSearchParams();
@@ -31,18 +31,20 @@ export default function Page() {
 			></Stack.Screen>
 			{nodeInfo && (
 				<ScrollView>
-					<View className="p-4">
+					<View className="p-4 pt-10">
 						<ThemedText className="text-2xl font-bold mb-2">
 							{TitleRenderer(nodeInfo.titleElements)}
 						</ThemedText>
-						<Image
-							source={{ uri: nodeInfo.image }}
-							className="overflow-hidden mb-3 w-full rounded-lg bg-white"
-							style={{
-								aspectRatio: imgAspectRation,
-								resizeMode: imgAspectRation > 1 ? "contain" : "cover",
-							}}
-						/>
+						<Pressable onPress={() => Linking.openURL(nodeInfo.storeURL)}>
+							<Image
+								source={{ uri: nodeInfo.image }}
+								className="overflow-hidden mb-3 w-full rounded-lg bg-white"
+								style={{
+									aspectRatio: imgAspectRation,
+									resizeMode: imgAspectRation > 1 ? "contain" : "cover",
+								}}
+							/>
+						</Pressable>
 						<NodeScreenContent elem={nodeInfo.descriptionElement} />
 					</View>
 				</ScrollView>
