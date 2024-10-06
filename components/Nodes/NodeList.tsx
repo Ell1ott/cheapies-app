@@ -20,7 +20,8 @@ export const NodeList = ({ items }: { items: Item[] }) => {
 	}, [items, listRef]);
 
 	return (
-		<ThemedView>
+		<ThemedView className="flex-1">
+			{/* <View className="bg-red-500 flex-1"></View> */}
 			<SafeAreaView>
 				{items.length === 0 ? (
 					<Text>Loading...</Text>

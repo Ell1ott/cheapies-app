@@ -27,7 +27,6 @@ export default function HomeScreen() {
 				<DropdownComponent onCategoryChange={setCategory} />
 			</Header>
 			<NodeList items={data} />
-			<Text></Text>
 		</>
 	);
 }
