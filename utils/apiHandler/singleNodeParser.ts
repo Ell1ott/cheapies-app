@@ -13,6 +13,7 @@ export interface NodeInfo {
 }
 
 import * as htmlparser2 from "htmlparser2";
+import * as fs from "fs";
 
 const removeWhitespace = (root: HTMLElement) => {
 	var i = 0,
@@ -48,14 +49,25 @@ export async function getNodeInfo(id: string): Promise<NodeInfo> {
 
 	let descriptionElem = main?.querySelector(".content");
 
-	console.log(
-		descriptionElem?.childNodes.map((e) => ({ name: e.tagName, text: e.text }))
-	);
-
 	const description = descriptionElem?.text ?? "No description";
 	descriptionElem = removeWhitespace(descriptionElem!!);
 
-	const image = main?.querySelector(".content img")?.attributes.src ?? "";
+	let image =
+		main
+			?.querySelector(".foxshot-container a")
+			?.attributes.title.replace("Go to ", "") ?? "";
+
+	if (
+		!(
+			image.endsWith(".jpg") ||
+			image.endsWith(".png") ||
+			image.endsWith(".jpeg")
+		)
+	) {
+		image = main?.querySelector(".foxshot-container img")?.attributes.src ?? "";
+	}
+
+	console.log(image);
 
 	const upvotes = parseInt(main?.querySelector(".voteup")?.text ?? "0");
 	const downvotes = parseInt(main?.querySelector(".votedown")?.text ?? "0");
