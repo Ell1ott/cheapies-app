@@ -22,7 +22,7 @@ export const Header = ({
 	<BlankHeader>
 		{leftIcon}
 
-		{Children.only(children)}
+		{children}
 		{/* <Pressable className="flex flex-row items-center gap-1.5">
     <ThemedText className="text-xl">Deals</ThemedText>
     <FontAwesomeIcon
