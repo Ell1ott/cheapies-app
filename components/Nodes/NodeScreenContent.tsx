@@ -50,9 +50,11 @@ export const NodeScreenContent = ({ elem }: { elem: HTMLElement }) => {
 			return children;
 		case "li":
 			return (
-				<View className="pb-2 flex flex-row">
+				<View className="pb-2 pl-2 flex flex-row gap-2">
 					<ThemedText>{"\u2022 "}</ThemedText>
-					<View>{children}</View>
+					<View>
+						<ThemedText>{children}</ThemedText>
+					</View>
 				</View>
 			);
 		default:
