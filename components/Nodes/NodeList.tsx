@@ -14,15 +14,16 @@ const sep = () => {
 export const NodeList = ({ category }: { category: string }) => {
 	let listRef: any = null;
 	const [items, setData] = React.useState<Item[]>([]);
-	const [nextUrl, setNextUrl] = useState("");
+	const [currentPage, setCurrentPage] = useState(0);
+	const [showLoading, setShowLoading] = useState(true);
+	const [currentlyLoading, setCurrentlyLoading] = useState(false);
 
 	useEffect(() => {
+		setCurrentPage(0);
 		fetchRoot(category).then((root) => {
 			getNodeList(root, category).then((data) => {
 				setData(data);
 			});
-			setNextUrl(root.querySelector(".notloaded")?.attributes["data-src"] ?? "");
-			console.log("nexturl", nextUrl);
 		});
 	}, [category]);
 
@@ -36,13 +37,23 @@ export const NodeList = ({ category }: { category: string }) => {
 	}, [items, listRef]);
 
 	const loadMoreData = async () => {
-		if (!nextUrl) return;
+		if (currentlyLoading) return;
+		setCurrentlyLoading(true);
 		console.log("fetching next page");
-		const root = await fetchRoot(nextUrl);
+		const root = await fetchRoot(category + "?page=" + (currentPage + 1));
 		getNodeList(root, category).then((data) => {
+			if (data.length === 0) {
+				setShowLoading(false);
+				console.log("no more data");
+				setCurrentlyLoading(false);
+				return;
+			}
+			
+			setCurrentPage(currentPage + 1);
 			setData([...items, ...data]);
 		});
-		setNextUrl(root.querySelector(".notloaded")?.attributes["data-src"] ?? "");
+		
+		setCurrentlyLoading(false);
 	};
 
 	return (
@@ -56,7 +67,8 @@ export const NodeList = ({ category }: { category: string }) => {
 						onEndReached={loadMoreData}
 						listViewRef={(ref) => (listRef = ref)}
 						data={items}
-						ListFooterComponent={loadingItemsItem}
+						ListFooterComponent={showLoading ? loadingItemsItem : null}
+
 						renderItem={({ item }) => <NodeItem item={item} />}
 						renderHiddenItem={(data, rowMap) => (
 							<View>
