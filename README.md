@@ -2,6 +2,8 @@
 
 The **Cheapies Mobile App** is designed to enhance the mobile experience of the Cheapies website, making it easier to browse deals, competitions, directly from your phone. This additionally makes It possible to have features like saving deals and push notifications.
 
+**Note: This project is currently in a very early stage of development. Features and functionality may be limited or subject to change.**
+
 ## Features
 
 ### Current Features

@@ -1,12 +1,8 @@
 import { Item } from "@/components/Nodes/NodeItem";
 import HTMLparser, { HTMLElement } from "fast-html-parser";
-import { fetchData } from "./dataFetcher";
 
-export const parseNodeList = (html: string, url: string) => {
-	const root = HTMLparser.parse(html);
+export const parseNodeList = (root: HTMLElement, url: string) => {
 	const items = root.querySelectorAll(".node");
-
-	if (url.includes("search")) root;
 
 	let currentId = 0;
 
@@ -40,6 +36,7 @@ const parseNodeItem = (
 		(e) => e.tagName === "a"
 	)?.childNodes;
 
+	
 	const nodeUrl = title?.querySelector("a")?.attributes.href ?? "";
 
 	const nodeId = nodeUrl.split("/").pop() ?? "";
@@ -47,7 +44,7 @@ const parseNodeItem = (
 	return {
 		title: title?.childNodes.find((e) => e.tagName === "a")?.text ?? "No title",
 		titleElements: titleElems,
-		id: id + "",
+		id: nodeId + "",
 		tags: title
 			.querySelectorAll(".tagger")
 			.map((tag: any) => ({ type: tag.classNames[1], text: tag.text })),
@@ -67,9 +64,8 @@ const parseNodeItem = (
 	};
 };
 
-export const parseSearchResults = (html: string, url: string) => {
-	const root = HTMLparser.parse(html);
-	const sr = root.querySelector(".search-results");
+export const parseSearchResults = (elem: HTMLElement, url: string) => {
+	const sr = elem.querySelector(".search-results");
 	if (!sr) return [];
 	const titles = sr.querySelectorAll(".title");
 	const contents = sr.querySelectorAll("dd");
@@ -88,11 +84,13 @@ export const parseSearchResults = (html: string, url: string) => {
 	return items;
 };
 
-export const getNodeList = async (url: string): Promise<Item[]> => {
-	const html = await fetchData(url);
+export const getNodeList = async (
+	root: HTMLElement,
+	url: string
+): Promise<Item[]> => {
 	// console.log(html);
-	if (url.includes("search")) return parseSearchResults(html, url);
-	const items = parseNodeList(html, url);
+	if (url.includes("search")) return parseSearchResults(root, url);
+	const items = parseNodeList(root, url);
 
 	return items;
 };

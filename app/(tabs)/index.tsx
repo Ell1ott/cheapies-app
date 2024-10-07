@@ -12,21 +12,12 @@ export default function HomeScreen() {
 
 	const [category, setCategory] = useState("deals");
 
-	useEffect(() => {
-		getNodeList(category).then((data) => {
-			setData(data);
-		});
-	}, [category]);
-
 	return (
 		<>
-			<Stack.Screen
-				options={{ headerTitle: "hii", title: "hi", headerShown: false }}
-			></Stack.Screen>
 			<Header>
 				<DropdownComponent onCategoryChange={setCategory} />
 			</Header>
-			<NodeList items={data} />
+			<NodeList category={category} />
 		</>
 	);
 }

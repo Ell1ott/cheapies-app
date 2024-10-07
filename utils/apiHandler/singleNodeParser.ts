@@ -25,10 +25,10 @@ const removeWhitespace = (root: HTMLElement) => {
 		if (node.nodeType === 3) {
 			console.log("i is ", i);
 			if (node.isWhitespace) continue;
-			if (i === 0) node.rawText = node.rawText.trimLeft();
+			if (i === 0) (node as any).rawText = node.rawText.trimLeft();
 			// else console.log("hiiii");
 			if (i === root.childNodes.length - 1)
-				node.rawText = node.rawText.trimRight();
+				(node as any).rawText = node.rawText.trimRight();
 		} else if (node.nodeType === 1) {
 			removeWhitespace(node);
 		}
