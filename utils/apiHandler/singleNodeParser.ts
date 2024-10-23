@@ -21,12 +21,9 @@ const removeWhitespace = (root: HTMLElement) => {
 		o = 0;
 	for (; i < root.childNodes.length; i++) {
 		var node = root.childNodes[i];
-		console.log(node.nodeType);
 		if (node.nodeType === 3) {
-			console.log("i is ", i);
 			if (node.isWhitespace) continue;
 			if (i === 0) (node as any).rawText = node.rawText.trimLeft();
-			// else console.log("hiiii");
 			if (i === root.childNodes.length - 1)
 				(node as any).rawText = node.rawText.trimRight();
 		} else if (node.nodeType === 1) {
