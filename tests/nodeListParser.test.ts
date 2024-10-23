@@ -45,7 +45,7 @@ describe("getNodeList of search results", () => {
 });
 describe("getNodeList of competitions", () => {
 	it("should return a list of nodes from the cheapies website", async () => {
-		const result = getNodeList(await fetchRoot("competitions"), "competitions");
+		const result = getNodeList(await fetchRoot("competition"), "competition");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
 		expect(result[0].url).toBeDefined();
