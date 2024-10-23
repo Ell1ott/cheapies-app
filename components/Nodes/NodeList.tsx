@@ -21,9 +21,7 @@ export const NodeList = ({ category }: { category: string }) => {
 	useEffect(() => {
 		setCurrentPage(0);
 		fetchRoot(category).then((root) => {
-			getNodeList(root, category).then((data) => {
-				setData(data);
-			});
+			setData(getNodeList(root, category));
 		});
 	}, [category]);
 
@@ -40,19 +38,29 @@ export const NodeList = ({ category }: { category: string }) => {
 		if (currentlyLoading) return;
 		setCurrentlyLoading(true);
 		console.log("fetching next page");
+
+		const startTime = performance.now();
+
 		const root = await fetchRoot(category + "?page=" + (currentPage + 1));
-		getNodeList(root, category).then((data) => {
-			if (data.length === 0) {
-				setShowLoading(false);
-				console.log("no more data");
-				setCurrentlyLoading(false);
-				return;
-			}
-			
-			setCurrentPage(currentPage + 1);
-			setData([...items, ...data]);
-		});
-		
+
+		const data = getNodeList(root, category);
+		if (data.length === 0) {
+			setShowLoading(false);
+			console.log("no more data");
+			setCurrentlyLoading(false);
+			return;
+		}
+
+		setCurrentPage(currentPage + 1);
+		const newData = [...items, ...data];
+		const middleTime = performance.now();
+		setData(newData);
+		const endTime = performance.now();
+		const duration1 = middleTime - startTime;
+		const duration2 = endTime - middleTime;
+
+		console.log(`Fetch took ${duration1} ${duration2} milliseconds`);
+
 		setCurrentlyLoading(false);
 	};
 
@@ -68,7 +76,6 @@ export const NodeList = ({ category }: { category: string }) => {
 						listViewRef={(ref) => (listRef = ref)}
 						data={items}
 						ListFooterComponent={showLoading ? loadingItemsItem : null}
-
 						renderItem={({ item }) => <NodeItem item={item} />}
 						renderHiddenItem={(data, rowMap) => (
 							<View>
@@ -90,10 +97,8 @@ export const NodeList = ({ category }: { category: string }) => {
 	);
 };
 
-const loadingItemsItem = () => 
-	(
-		<View className="w-full justify-center h-20  items-center border-t border-white/10">
-			<ActivityIndicator size="large" color="#dddddd" />
-		</View>
-	);
-
+const loadingItemsItem = () => (
+	<View className="w-full justify-center h-20  items-center border-t border-white/10">
+		<ActivityIndicator size="large" color="#dddddd" />
+	</View>
+);

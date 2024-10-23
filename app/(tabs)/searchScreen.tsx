@@ -14,9 +14,7 @@ export default function SearchScreen() {
 
 	return (
 		<>
-			<Search
-				onSubmit={async (q) => setData(await getNodeList(getSearchUrl(q)))}
-			/>
+			<Search onSubmit={async (q) => setData(getNodeList(getSearchUrl(q)))} />
 
 			<NodeList items={data} />
 		</>

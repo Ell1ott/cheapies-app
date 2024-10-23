@@ -9,3 +9,5 @@ export const getBgColor = () =>
 		},
 		"background"
 	);
+
+export const getIconColor = () => "rgba(255, 255, 255, 0.6)";

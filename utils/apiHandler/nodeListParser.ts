@@ -36,7 +36,6 @@ const parseNodeItem = (
 		(e) => e.tagName === "a"
 	)?.childNodes;
 
-	
 	const nodeUrl = title?.querySelector("a")?.attributes.href ?? "";
 
 	const nodeId = nodeUrl.split("/").pop() ?? "";
@@ -84,10 +83,7 @@ export const parseSearchResults = (elem: HTMLElement, url: string) => {
 	return items;
 };
 
-export const getNodeList = async (
-	root: HTMLElement,
-	url: string
-): Promise<Item[]> => {
+export const getNodeList = (root: HTMLElement, url: string = ""): Item[] => {
 	// console.log(html);
 	if (url.includes("search")) return parseSearchResults(root, url);
 	const items = parseNodeList(root, url);

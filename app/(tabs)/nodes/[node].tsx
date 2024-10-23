@@ -1,3 +1,4 @@
+import { QuickActions } from "@/components/node/QuickActions";
 import { TitleRenderer } from "@/components/Nodes/NodeItem";
 import { NodeScreenContent } from "@/components/Nodes/NodeScreenContent";
 import { ThemedText } from "@/components/ThemedText";
@@ -13,7 +14,7 @@ export default function Page() {
 	const [imgAspectRation, setImgAspectRatio] = React.useState(1);
 
 	useEffect(() => {
-		getNodeInfo(local.node).then((data) => {
+		getNodeInfo(local.node as string).then((data) => {
 			setNodeInfo(data);
 			Image.getSize(data.image, (width, height) => {
 				console.log(width, height);
@@ -46,6 +47,7 @@ export default function Page() {
 							/>
 						</Pressable>
 						<NodeScreenContent elem={nodeInfo.descriptionElement} />
+						<QuickActions />
 					</View>
 				</ScrollView>
 			)}
