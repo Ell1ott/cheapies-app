@@ -1,4 +1,4 @@
-import { getSearchUrl } from "@/utils/apiHandler/dataFetcher";
+import { fetchRoot, getSearchUrl } from "@/utils/apiHandler/dataFetcher";
 import { getNodeList } from "@/utils/apiHandler/nodeListParser";
 
 // /c:/Users/ellio/Dokumenter/GitHub/cheapies-app/tests/apihandler.test.ts
@@ -7,7 +7,7 @@ import { getNodeList } from "@/utils/apiHandler/nodeListParser";
 
 describe("getNodeList of deals", () => {
 	it("should return a list of nodes from the cheapies website", async () => {
-		const result = await getNodeList("deals");
+		const result = getNodeList(await fetchRoot("deals"), "deals");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
 		expect(result[0].url).toBeDefined();
@@ -20,7 +20,7 @@ describe("getNodeList of deals", () => {
 });
 describe("getNodeList of feebies", () => {
 	it("should return a list of nodes from the cheapies website", async () => {
-		const result = await getNodeList("freebies");
+		const result = getNodeList(await fetchRoot("freebies"), "freebies");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
 		expect(result[0].url).toBeDefined();
@@ -34,7 +34,7 @@ describe("getNodeList of search results", () => {
 	it("should return a list of nodes from the cheapies website", async () => {
 		const searchUrl = getSearchUrl("search");
 
-		const result = await getNodeList(searchUrl);
+		const result = getNodeList(await fetchRoot(searchUrl), searchUrl);
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
 		expect(result[0].url).toBeDefined();
@@ -45,7 +45,7 @@ describe("getNodeList of search results", () => {
 });
 describe("getNodeList of competitions", () => {
 	it("should return a list of nodes from the cheapies website", async () => {
-		const result = await getNodeList("competition");
+		const result = getNodeList(await fetchRoot("competitions"), "competitions");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
 		expect(result[0].url).toBeDefined();
