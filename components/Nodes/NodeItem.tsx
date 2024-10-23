@@ -142,6 +142,8 @@ const TitlePart = (e: HTMLElement) => {
 	if (e.tagName === undefined) return e.text;
 	if (e.tagName === "em")
 		return <Text className={titleClasses[e.classNames[0]]}>{e.text}</Text>;
+	if (e.tagName === "strong")
+		return <Text className="bg-yellow-800">{e.text}</Text>;
 };
 
 const titleClasses = {
