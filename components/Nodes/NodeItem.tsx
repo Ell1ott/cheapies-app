@@ -4,10 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { HTMLElement } from "fast-html-parser";
 import { Link, router } from "expo-router";
-const rippleConfig = {
-	color: "rgba(255, 255, 255, 0.1)", // Ripple color
-	borderless: false, // Whether the ripple should be bounded or not
-};
+import { rippleConfig } from "../rippleConfig";
 
 export type Item = {
 	id: string;

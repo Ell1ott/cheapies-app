@@ -9,7 +9,7 @@ import * as fs from "fs";
 describe("getNodeInformation from a single node", () => {
 	it("should return all the info of a given node", async () => {
 		let data = await fetchData(`node/48651`);
-		fs.writeFileSync("output.txt", data);
+		// fs.writeFileSync("output.txt", data);
 		const result = await getNodeInfo("48651");
 
 		expect(result.title).toBeDefined();

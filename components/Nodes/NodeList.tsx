@@ -7,8 +7,8 @@ import React, { useState } from "react";
 import { getNodeList } from "@/utils/apiHandler/nodeListParser";
 import { fetchRoot } from "@/utils/apiHandler/dataFetcher";
 
-const sep = () => {
-	return <View className="w-full h-[1px] bg-white/10"></View>;
+export const Separator = ({ className }: { className: string }) => {
+	return <View className={"h-[1px] bg-white/10 " + className}></View>;
 };
 
 export const NodeList = ({ category }: { category: string }) => {
@@ -81,7 +81,7 @@ export const NodeList = ({ category }: { category: string }) => {
 							</View>
 						)}
 						keyExtractor={(item) => item.id}
-						ItemSeparatorComponent={sep}
+						ItemSeparatorComponent={Separator}
 						leftOpenValue={75}
 						rightOpenValue={-150}
 						previewRowKey={"0"}

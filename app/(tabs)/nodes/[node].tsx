@@ -1,5 +1,6 @@
 import { QuickActions } from "@/components/node/QuickActions";
 import { TitleRenderer } from "@/components/Nodes/NodeItem";
+import { Separator } from "@/components/Nodes/NodeList";
 import { NodeScreenContent } from "@/components/Nodes/NodeScreenContent";
 import { ThemedText } from "@/components/ThemedText";
 import { getNodeInfo, NodeInfo } from "@/utils/apiHandler/singleNodeParser";
@@ -46,7 +47,10 @@ export default function Page() {
 							/>
 						</Pressable>
 						<NodeScreenContent elem={nodeInfo.descriptionElement} />
-						<QuickActions />
+
+						<Separator className="-mx-4 my-7" />
+
+						<QuickActions nodeId={local.node as string} nodeInfo={nodeInfo} />
 					</View>
 				</ScrollView>
 			)}
