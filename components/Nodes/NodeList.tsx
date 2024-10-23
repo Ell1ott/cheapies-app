@@ -37,7 +37,6 @@ export const NodeList = ({ category }: { category: string }) => {
 	const loadMoreData = async () => {
 		if (currentlyLoading) return;
 		setCurrentlyLoading(true);
-		console.log("fetching next page");
 
 		const startTime = performance.now();
 
@@ -58,8 +57,6 @@ export const NodeList = ({ category }: { category: string }) => {
 		const endTime = performance.now();
 		const duration1 = middleTime - startTime;
 		const duration2 = endTime - middleTime;
-
-		console.log(`Fetch took ${duration1} ${duration2} milliseconds`);
 
 		setCurrentlyLoading(false);
 	};

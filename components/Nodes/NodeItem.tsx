@@ -33,7 +33,6 @@ const tagColors = {
 };
 
 function onPress(item: Item) {
-	console.log("Navigating to", item.nodeId);
 	router.navigate({
 		pathname: "/nodes/[node]",
 		params: { node: item.nodeId },

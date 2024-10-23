@@ -9,7 +9,7 @@ import { View, ScrollView, Image, Pressable, Linking } from "react-native";
 
 export default function Page() {
 	const local = useLocalSearchParams();
-	console.log(local);
+
 	const [nodeInfo, setNodeInfo] = React.useState<NodeInfo | null>(null);
 	const [imgAspectRation, setImgAspectRatio] = React.useState(1);
 
@@ -17,7 +17,6 @@ export default function Page() {
 		getNodeInfo(local.node as string).then((data) => {
 			setNodeInfo(data);
 			Image.getSize(data.image, (width, height) => {
-				console.log(width, height);
 				setImgAspectRatio(Math.max(Math.min(width / height, 3), 1));
 			});
 		});
