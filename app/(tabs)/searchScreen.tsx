@@ -22,8 +22,7 @@ export default function SearchScreen() {
 					setData(getNodeList(await fetchRoot(url), url));
 				}}
 			/>
-
-			<NodeList category={url} />
+			{url !== "" && <NodeList category={url} />}
 		</>
 	);
 }
