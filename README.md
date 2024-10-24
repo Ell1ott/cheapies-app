@@ -14,7 +14,7 @@ The **Cheapies Mobile App** is designed to enhance the mobile experience of the 
 ### Planned Features
 - **Saved Deals:** Save deals to revisit later.
 - **Notifications:** Get alerts when new deals are posted.
-- **Personalization:** Customize your app experience based on your interests.
+- **Personalization:** E.g. dark and light mode and other personal preferences
 
 ## Technologies
 
@@ -41,7 +41,7 @@ To run the project locally:
    npm start
    ```
 
-You can use the app on a mobile device via the Expo Go app or run it in an emulator. **Note:** The web version may not function correctly, as it's not yet optimized.
+You can use the app on a mobile device via the Expo Go app or run it in an emulator. **Note:** The web version may not function correctly
 
 ## Contributions
 
