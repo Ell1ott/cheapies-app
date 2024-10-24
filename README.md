@@ -46,7 +46,3 @@ You can use the app on a mobile device via the Expo Go app or run it in an emula
 ## Contributions
 
 We welcome contributions! If you have an idea, find a bug, or want to improve the app, feel free to open a pull request or an issue. All suggestions are appreciated.
-
-## License
-
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**. You are free to share and adapt the code, but commercial use is not allowed. For more details, refer to the LICENSE file.
