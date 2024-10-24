@@ -1,7 +1,7 @@
 import { ActivityIndicator, SafeAreaView, Text, View } from "react-native";
 import { ThemedView } from "../ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { Item, NodeItem } from "./NodeItem";
+import { Item, MemoNodeItem, NodeItem } from "./NodeItem";
 import { useEffect } from "react";
 import React, { useState } from "react";
 import { getNodeList } from "@/utils/apiHandler/nodeListParser";
@@ -73,7 +73,7 @@ export const NodeList = ({ category }: { category: string }) => {
 						listViewRef={(ref) => (listRef = ref)}
 						data={items}
 						ListFooterComponent={showLoading ? loadingItemsItem : null}
-						renderItem={({ item }) => <NodeItem item={item} />}
+						renderItem={({ item }) => <MemoNodeItem item={item} />}
 						renderHiddenItem={(data, rowMap) => (
 							<View>
 								<Text>Left</Text>

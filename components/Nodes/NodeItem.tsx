@@ -5,6 +5,7 @@ import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { HTMLElement } from "fast-html-parser";
 import { Link, router } from "expo-router";
 import { rippleConfig } from "../rippleConfig";
+import React, { memo } from "react";
 
 export type Item = {
 	id: string;
@@ -87,6 +88,8 @@ export const NodeItem = ({ item }: { item: Item }) => {
 		<SimpleItem item={item} />
 	);
 };
+
+export const MemoNodeItem = memo(NodeItem);
 
 const SimpleItem = ({ item }: { item: Item }) => (
 	<Pressable
