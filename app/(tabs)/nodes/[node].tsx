@@ -36,16 +36,20 @@ export default function Page() {
 						<ThemedText className="text-2xl font-bold mb-2">
 							{TitleRenderer(nodeInfo.titleElements)}
 						</ThemedText>
-						<Pressable onPress={() => Linking.openURL(nodeInfo.storeURL)}>
-							<Image
-								source={{ uri: nodeInfo.image }}
-								className="overflow-hidden mb-3 w-full rounded-lg bg-white"
-								style={{
-									aspectRatio: imgAspectRation,
-									resizeMode: imgAspectRation > 1 ? "contain" : "cover",
-								}}
-							/>
-						</Pressable>
+						{!nodeInfo.image.startsWith(
+							"https://files.delvu.com/defaults/default.jpg"
+						) && (
+							<Pressable onPress={() => Linking.openURL(nodeInfo.storeURL)}>
+								<Image
+									source={{ uri: nodeInfo.image }}
+									className="overflow-hidden mb-3 w-full rounded-lg bg-white"
+									style={{
+										aspectRatio: imgAspectRation,
+										resizeMode: imgAspectRation > 1 ? "contain" : "cover",
+									}}
+								/>
+							</Pressable>
+						)}
 						<NodeScreenContent elem={nodeInfo.descriptionElement} />
 
 						<Separator className="-mx-4 my-7" />

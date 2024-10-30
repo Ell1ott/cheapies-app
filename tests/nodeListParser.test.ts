@@ -15,6 +15,8 @@ describe("getNodeList of deals", () => {
 		expect(result[0].title).not.toBe("");
 		expect(result[0].nodeId).toBeDefined();
 		expect(result[0].nodeId).not.toBe("");
+		expect(result[0].commentCount).toBeDefined();
+		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
 	});
 });
@@ -26,6 +28,10 @@ describe("getNodeList of feebies", () => {
 		expect(result[0].url).toBeDefined();
 		expect(result[0].description).toBeDefined();
 		expect(result[0].title).not.toBe("");
+		expect(result[0].nodeId).toBeDefined();
+		expect(result[0].nodeId).not.toBe("");
+		expect(result[0].commentCount).toBeDefined();
+		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
 	});
 });
@@ -40,6 +46,10 @@ describe("getNodeList of search results", () => {
 		expect(result[0].url).toBeDefined();
 		expect(result[0].description).toBeDefined();
 		expect(result[0].title).not.toBe("");
+		expect(result[0].nodeId).toBeDefined();
+		expect(result[0].nodeId).not.toBe("");
+		expect(result[0].commentCount).toBeDefined();
+		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
 	});
 });
@@ -51,6 +61,8 @@ describe("getNodeList of competitions", () => {
 		expect(result[0].url).toBeDefined();
 		// expect(result[0].description).toBeDefined(); they dont have one
 		expect(result[0].title).not.toBe("");
+		expect(result[0].commentCount).toBeDefined();
+		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
 	});
 });

@@ -40,6 +40,12 @@ const parseNodeItem = (
 
 	const nodeId = nodeUrl.split("/").pop() ?? "";
 
+	const links = item.querySelector("ul.links")?.childNodes;
+
+	const commentCounter = links?.find((e) =>
+		e.firstChild?.classNames[1]?.includes("comment")
+	);
+
 	return {
 		title: title?.childNodes.find((e) => e.tagName === "a")?.text ?? "No title",
 		titleElements: titleElems,
@@ -50,6 +56,7 @@ const parseNodeItem = (
 		image: imageContainer.querySelector("a img")?.attributes.src,
 		upvotes: parseInt(item.querySelector(".voteup")?.text ?? "0"),
 		downvotes: parseInt(item.querySelector(".votedown")?.text ?? "0"),
+		commentCount: parseInt(commentCounter?.text ?? "0"),
 		url: nodeUrl,
 		description:
 			url == "competition"

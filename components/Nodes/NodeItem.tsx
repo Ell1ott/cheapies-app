@@ -16,6 +16,7 @@ export type Item = {
 	image: string | undefined;
 	upvotes: number;
 	downvotes: number;
+	commentCount: number;
 	url: string;
 	nodeId: string;
 };
