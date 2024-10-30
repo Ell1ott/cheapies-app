@@ -1,7 +1,11 @@
 import { Text, View, Pressable, Image } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
+import {
+	faComment,
+	faDownLong,
+	faUpLong,
+} from "@fortawesome/free-solid-svg-icons";
 import { HTMLElement } from "fast-html-parser";
 import { Link, router } from "expo-router";
 import { rippleConfig } from "../rippleConfig";
@@ -74,6 +78,14 @@ const ItemWithImage = ({ item }: { item: Item }) => (
 								{item.downvotes}
 							</ThemedText>
 							<FontAwesomeIcon icon={faDownLong} color="#ef4444" size={20} />
+						</View>
+					)}
+					{item.commentCount != 0 && (
+						<View className="flex items-center justify-center gap-2 flex-row">
+							<ThemedText className="font-bold text-2xl text-white">
+								{item.commentCount}
+							</ThemedText>
+							<FontAwesomeIcon icon={faComment} color="#60a5fa" size={20} />
 						</View>
 					)}
 				</View>
