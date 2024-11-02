@@ -65,8 +65,6 @@ const parseNodeItem = (
 						.replaceAll(/(\r\n|\n|\r)/gm, " ")
 						.replaceAll(/\s{2,}/g, " ")
 						.replaceAll("…", ""),
-
-		nodeId: nodeId,
 	};
 };
 

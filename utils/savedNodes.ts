@@ -43,8 +43,6 @@ export const useSavedNodesStore = create<StoreState>((set) => ({
 	clearItems: () => set({ items: {} }),
 }));
 
-useSavedNodesStore.subscribe(console.log);
-
 useSavedNodesStore.subscribe(async (state) => {
 	try {
 		const jsonState = JSON.stringify(state);

@@ -21,8 +21,6 @@ export type Item = {
 	upvotes: number;
 	downvotes: number;
 	commentCount: number;
-	url: string;
-	nodeId: string;
 };
 
 export const tagColors = {
@@ -38,12 +36,12 @@ export const tagColors = {
 function onPress(item: Item) {
 	router.navigate({
 		pathname: "/nodes/[node]",
-		params: { node: item.nodeId },
+		params: { node: item.id },
 	});
 }
 const ItemWithImage = ({ item }: { item: Item }) => (
 	<Link
-		href={{ pathname: "/(tabs)/nodes/[node]", params: { node: item.nodeId } }}
+		href={{ pathname: "/(tabs)/nodes/[node]", params: { node: item.id } }}
 		asChild
 	>
 		<Pressable

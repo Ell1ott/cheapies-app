@@ -1,59 +1,42 @@
-import { Text, Image, StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { Header } from "@/components/navigation/header/header";
+import useSavedNodesStore from "@/utils/savedNodes";
+import { NodeList } from "@/components/Nodes/NodeList";
+import { useEffect } from "react";
+import { NodeInfo } from "@/utils/apiHandler/singleNodeParser";
 
 export default function HomeScreen() {
+	const savedNodes: Record<string, NodeInfo> = useSavedNodesStore(
+		(state) => state.items
+	);
+	useSavedNodesStore.subscribe(console.log);
+
+	useEffect(() => {
+		console.log("Saved Nodes:");
+		console.log(savedNodes);
+	});
 	return (
-		<ParallaxScrollView
-			headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-			headerImage={
-				<Image
-					source={require("@/assets/images/partial-react-logo.png")}
-					style={styles.reactLogo}
-				/>
-			}
-		>
-			<ThemedView style={styles.titleContainer}>
-				<ThemedText type="title">Welcome!</ThemedText>
-				<HelloWave />
-			</ThemedView>
-			<ThemedView style={styles.stepContainer}>
-				<ThemedText type="subtitle">Step 1: Try it</ThemedText>
-				<Text className="text-red-500 font-extrabold">Hello</Text>
-				<Text className="text-red-500 font-extrabold">Hello</Text>
-				<Text className="text-red-500 font-extrabold">Hello</Text>
-				<ThemedText>
-					Edit{" "}
-					<ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-					to see changes. Press{" "}
-					<ThemedText type="defaultSemiBold">
-						{Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-					</ThemedText>{" "}
-					to open developer tools.
-				</ThemedText>
-			</ThemedView>
-			<ThemedView style={styles.stepContainer}>
-				<ThemedText type="subtitle">Step 2: Explore</ThemedText>
-				<ThemedText>
-					Tap the Explore tab to learn more about what's included in this
-					starter app.
-				</ThemedText>
-			</ThemedView>
-			<ThemedView style={styles.stepContainer}>
-				<ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-				<ThemedText>
-					When you're ready, run{" "}
-					<ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-					to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-					directory. This will move the current{" "}
-					<ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-					<ThemedText type="defaultSemiBold">app-example</ThemedText>.
-				</ThemedText>
-			</ThemedView>
-		</ParallaxScrollView>
+		<>
+			<Header>
+				<ThemedText className="font-semibold text-xl">Saved Deals</ThemedText>
+			</Header>
+
+			<NodeList
+				items={Object.values(savedNodes).map((n) => ({
+					...n,
+					commentCount: 0,
+					tags: [],
+					description:
+						n.description
+							.replace(/\n/g, " ")
+							.replace(/\s+/g, " ")
+							.trim()
+							.substring(0, 150) + (n.description.length > 100 ? " ..." : ""),
+				}))}
+			/>
+		</>
 	);
 }
 

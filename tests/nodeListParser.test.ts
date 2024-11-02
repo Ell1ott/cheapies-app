@@ -10,11 +10,10 @@ describe("getNodeList of deals", () => {
 		const result = getNodeList(await fetchRoot("deals"), "deals");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
-		expect(result[0].url).toBeDefined();
 		expect(result[0].description).toBeDefined();
 		expect(result[0].title).not.toBe("");
-		expect(result[0].nodeId).toBeDefined();
-		expect(result[0].nodeId).not.toBe("");
+		expect(result[0].id).toBeDefined();
+		expect(result[0].id).not.toBe("");
 		expect(result[0].commentCount).toBeDefined();
 		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
@@ -25,11 +24,10 @@ describe("getNodeList of feebies", () => {
 		const result = getNodeList(await fetchRoot("freebies"), "freebies");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
-		expect(result[0].url).toBeDefined();
 		expect(result[0].description).toBeDefined();
 		expect(result[0].title).not.toBe("");
-		expect(result[0].nodeId).toBeDefined();
-		expect(result[0].nodeId).not.toBe("");
+		expect(result[0].id).toBeDefined();
+		expect(result[0].id).not.toBe("");
 		expect(result[0].commentCount).toBeDefined();
 		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
@@ -43,11 +41,11 @@ describe("getNodeList of search results", () => {
 		const result = getNodeList(await fetchRoot(searchUrl), searchUrl);
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
-		expect(result[0].url).toBeDefined();
+		expect(result[0]).toBeDefined();
 		expect(result[0].description).toBeDefined();
 		expect(result[0].title).not.toBe("");
-		expect(result[0].nodeId).toBeDefined();
-		expect(result[0].nodeId).not.toBe("");
+		expect(result[0].id).toBeDefined();
+		expect(result[0].id).not.toBe("");
 		expect(result[0].commentCount).toBeDefined();
 		expect(result[0].commentCount).toBeGreaterThan(-1);
 		// console.log(result);
@@ -58,7 +56,6 @@ describe("getNodeList of competitions", () => {
 		const result = getNodeList(await fetchRoot("competition"), "competition");
 		expect(result.length).toBeGreaterThan(0);
 		expect(result[0].title).toBeDefined();
-		expect(result[0].url).toBeDefined();
 		// expect(result[0].description).toBeDefined(); they dont have one
 		expect(result[0].title).not.toBe("");
 		expect(result[0].commentCount).toBeDefined();
