@@ -1,5 +1,6 @@
 import { getIconColor } from "@/utils/themeColor";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { faBookmark as faBookmarkSolid } from "@fortawesome/free-solid-svg-icons";
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark as faSolidBookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -10,6 +11,8 @@ import { Share } from "react-native";
 import { NodeInfo } from "@/utils/apiHandler/singleNodeParser";
 import useSavedNodesStore from "@/utils/savedNodes";
 import { ThemedText } from "../ThemedText";
+import { useMemo } from "react";
+import { act } from "react-test-renderer";
 
 export const QuickActions = ({
 	nodeId,
@@ -20,6 +23,12 @@ export const QuickActions = ({
 }) => {
 	const savedNodes = useSavedNodesStore((state) => state.items);
 	const saveNode = useSavedNodesStore((state) => state.addItem);
+
+	const isCurrentNodeSaved = useMemo(
+		() => savedNodes[nodeId] !== undefined,
+		[savedNodes, nodeId]
+	);
+
 	return (
 		<View className="flex flex-row gap-3">
 			<QuickAction
@@ -38,6 +47,9 @@ export const QuickActions = ({
 			></QuickAction>
 			<QuickAction
 				icon={faBookmark}
+				activeIcon={faSolidBookmark}
+				active={isCurrentNodeSaved}
+				activeColor="#FFD700"
 				onPress={() => {
 					saveNode(nodeInfo);
 				}}
@@ -48,9 +60,15 @@ export const QuickActions = ({
 
 export const QuickAction = ({
 	icon,
+	activeIcon,
+	active = false,
+	activeColor,
 	onPress,
 }: {
 	icon: any;
+	activeIcon?: any;
+	active?: boolean;
+	activeColor?: string;
 	onPress: () => void;
 }) => (
 	<Pressable
@@ -58,6 +76,10 @@ export const QuickAction = ({
 		onPress={onPress}
 		android_ripple={rippleConfig}
 	>
-		<FontAwesomeIcon icon={icon} size={25} color={getIconColor()} />
+		<FontAwesomeIcon
+			icon={active ? activeIcon : icon}
+			size={25}
+			color={active ? activeColor : getIconColor()}
+		/>
 	</Pressable>
 );
