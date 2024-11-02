@@ -11,7 +11,7 @@ export const Separator = ({ className }: { className: string }) => {
 	return <View className={"h-[1px] bg-white/10 " + className}></View>;
 };
 
-export const NodeList = ({ category }: { category: string }) => {
+export const DynamicNodeList = ({ category }: { category: string }) => {
 	let listRef: any = null;
 	const [items, setData] = React.useState<Item[]>([]);
 	const [currentPage, setCurrentPage] = useState(0);

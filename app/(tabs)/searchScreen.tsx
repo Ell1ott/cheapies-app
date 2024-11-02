@@ -1,6 +1,6 @@
 import { Search } from "@/components/navigation/header/search";
 import { Item } from "@/components/Nodes/NodeItem";
-import { NodeList } from "@/components/Nodes/NodeList";
+import { DynamicNodeList } from "@/components/Nodes/DynamicNodeList";
 import { fetchRoot, getSearchUrl } from "@/utils/apiHandler/dataFetcher";
 import { getNodeList } from "@/utils/apiHandler/nodeListParser";
 import { useState } from "react";
@@ -22,7 +22,7 @@ export default function SearchScreen() {
 					setData(getNodeList(await fetchRoot(url), url));
 				}}
 			/>
-			{url !== "" && <NodeList category={url} />}
+			{url !== "" && <DynamicNodeList category={url} />}
 		</>
 	);
 }

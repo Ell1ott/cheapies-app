@@ -36,15 +36,12 @@ export const QuickActions = ({
 					);
 				}}
 			></QuickAction>
-			<QuickAction icon={faBookmark} onPress={() => {}}></QuickAction>
-			<QuickAction icon={faShareNodes} onPress={() => {}}></QuickAction>
 			<QuickAction
 				icon={faBookmark}
 				onPress={() => {
 					saveNode(nodeInfo);
 				}}
 			></QuickAction>
-			<ThemedText>{JSON.stringify(savedNodes)}</ThemedText>
 		</View>
 	);
 };

@@ -1,6 +1,6 @@
 import { QuickActions } from "@/components/node/QuickActions";
 import { TitleRenderer } from "@/components/Nodes/NodeItem";
-import { Separator } from "@/components/Nodes/NodeList";
+import { Separator } from "@/components/Nodes/DynamicNodeList";
 import { NodeScreenContent } from "@/components/Nodes/NodeScreenContent";
 import { ThemedText } from "@/components/ThemedText";
 import { getNodeInfo, NodeInfo } from "@/utils/apiHandler/singleNodeParser";
