@@ -23,6 +23,7 @@ export const QuickActions = ({
 }) => {
 	const savedNodes = useSavedNodesStore((state) => state.items);
 	const saveNode = useSavedNodesStore((state) => state.addItem);
+	const unsaveNode = useSavedNodesStore((state) => state.removeItem);
 
 	const isCurrentNodeSaved = useMemo(
 		() => savedNodes[nodeId] !== undefined,
@@ -51,7 +52,8 @@ export const QuickActions = ({
 				active={isCurrentNodeSaved}
 				activeColor="#FFD700"
 				onPress={() => {
-					saveNode(nodeInfo);
+					if (isCurrentNodeSaved) unsaveNode(nodeInfo.id);
+					else saveNode(nodeInfo);
 				}}
 			></QuickAction>
 		</View>
