@@ -8,6 +8,8 @@ import { rippleConfig } from "../rippleConfig";
 import * as Sharing from "expo-sharing";
 import { Share } from "react-native";
 import { NodeInfo } from "@/utils/apiHandler/singleNodeParser";
+import useSavedNodesStore from "@/utils/savedNodes";
+import { ThemedText } from "../ThemedText";
 
 export const QuickActions = ({
 	nodeId,
@@ -15,27 +17,37 @@ export const QuickActions = ({
 }: {
 	nodeId: string;
 	nodeInfo: NodeInfo;
-}) => (
-	<View className="flex flex-row gap-3">
-		<QuickAction
-			icon={faShareNodes}
-			onPress={async () => {
-				Share.share(
-					{
-						url: "https://www.cheapies.nz/node/" + nodeId,
-						message: "https://www.cheapies.nz/node/" + nodeId,
-						// message: nodeInfo.title,
-						title: nodeInfo.title,
-					},
-					{}
-				);
-			}}
-		></QuickAction>
-		<QuickAction icon={faBookmark} onPress={() => {}}></QuickAction>
-		<QuickAction icon={faShareNodes} onPress={() => {}}></QuickAction>
-		<QuickAction icon={faBookmark} onPress={() => {}}></QuickAction>
-	</View>
-);
+}) => {
+	const savedNodes = useSavedNodesStore((state) => state.items);
+	const saveNode = useSavedNodesStore((state) => state.addItem);
+	return (
+		<View className="flex flex-row gap-3">
+			<QuickAction
+				icon={faShareNodes}
+				onPress={async () => {
+					Share.share(
+						{
+							url: "https://www.cheapies.nz/node/" + nodeId,
+							message: "https://www.cheapies.nz/node/" + nodeId,
+							// message: nodeInfo.title,
+							title: nodeInfo.title,
+						},
+						{}
+					);
+				}}
+			></QuickAction>
+			<QuickAction icon={faBookmark} onPress={() => {}}></QuickAction>
+			<QuickAction icon={faShareNodes} onPress={() => {}}></QuickAction>
+			<QuickAction
+				icon={faBookmark}
+				onPress={() => {
+					saveNode(nodeInfo);
+				}}
+			></QuickAction>
+			<ThemedText>{JSON.stringify(savedNodes)}</ThemedText>
+		</View>
+	);
+};
 
 export const QuickAction = ({
 	icon,

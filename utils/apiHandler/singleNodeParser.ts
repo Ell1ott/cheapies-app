@@ -11,6 +11,7 @@ export interface NodeInfo {
 	upvotes: number;
 	downvotes: number;
 	tags: string[];
+	id: string;
 }
 
 import * as htmlparser2 from "htmlparser2";
@@ -80,5 +81,6 @@ export async function getNodeInfo(id: string): Promise<NodeInfo> {
 		upvotes,
 		downvotes,
 		tags: [],
+		id,
 	};
 }
