@@ -5,7 +5,7 @@ const loadState = async () => {
 	try {
 		const jsonState = await AsyncStorage.getItem("@app_state");
 		if (jsonState !== null) {
-			useStore.setState(JSON.parse(jsonState));
+			useSavedNodesStore.setState(JSON.parse(jsonState));
 		}
 	} catch (e) {
 		console.error(e);
@@ -21,7 +21,7 @@ interface StoreState {
 	clearItems: () => void;
 }
 
-const useStore = create<StoreState>((set) => ({
+export const useSavedNodesStore = create<StoreState>((set) => ({
 	items: [],
 
 	// Action to add an item
@@ -40,9 +40,9 @@ const useStore = create<StoreState>((set) => ({
 	clearItems: () => set({ items: [] }),
 }));
 
-useStore.subscribe(console.log);
+useSavedNodesStore.subscribe(console.log);
 
-useStore.subscribe(async (state) => {
+useSavedNodesStore.subscribe(async (state) => {
 	try {
 		const jsonState = JSON.stringify(state);
 		await AsyncStorage.setItem("@saved_nodes", jsonState);
@@ -51,4 +51,4 @@ useStore.subscribe(async (state) => {
 	}
 });
 
-export default useStore;
+export default useSavedNodesStore;
