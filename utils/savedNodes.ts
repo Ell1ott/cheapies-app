@@ -1,5 +1,18 @@
 import { Item } from "@/components/Nodes/NodeItem";
 import { create } from "zustand";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const loadState = async () => {
+	try {
+		const jsonState = await AsyncStorage.getItem("@app_state");
+		if (jsonState !== null) {
+			useStore.setState(JSON.parse(jsonState));
+		}
+	} catch (e) {
+		console.error(e);
+	}
+};
+
+loadState();
 
 interface StoreState {
 	items: Item[];
@@ -28,5 +41,14 @@ const useStore = create<StoreState>((set) => ({
 }));
 
 useStore.subscribe(console.log);
+
+useStore.subscribe(async (state) => {
+	try {
+		const jsonState = JSON.stringify(state);
+		await AsyncStorage.setItem("@saved_nodes", jsonState);
+	} catch (e) {
+		console.error(e);
+	}
+});
 
 export default useStore;
