@@ -1,15 +1,12 @@
 import { ActivityIndicator, SafeAreaView, Text, View } from "react-native";
 import { ThemedView } from "../ThemedView";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { Item, MemoNodeItem, NodeItem } from "./NodeItem";
+import { type Item } from "./NodeItem";
 import { useEffect } from "react";
 import React, { useState } from "react";
 import { getNodeList } from "@/utils/apiHandler/nodeListParser";
 import { fetchRoot } from "@/utils/apiHandler/dataFetcher";
-
-export const Separator = ({ className }: { className: string }) => {
-	return <View className={"h-[1px] bg-white/10 " + className}></View>;
-};
+import { NodeList } from "./NodeList";
 
 export const DynamicNodeList = ({ category }: { category: string }) => {
 	let listRef: any = null;
@@ -62,35 +59,12 @@ export const DynamicNodeList = ({ category }: { category: string }) => {
 	};
 
 	return (
-		<ThemedView className="flex-1">
-			{/* <View className="bg-red-500 flex-1"></View> */}
-			<SafeAreaView>
-				{items.length === 0 ? (
-					<Text>Loading...</Text>
-				) : (
-					<SwipeListView
-						onEndReached={loadMoreData}
-						listViewRef={(ref) => (listRef = ref)}
-						data={items}
-						ListFooterComponent={showLoading ? loadingItemsItem : null}
-						renderItem={({ item }) => <MemoNodeItem item={item} />}
-						renderHiddenItem={(data, rowMap) => (
-							<View>
-								<Text>Left</Text>
-								<Text>Right</Text>
-							</View>
-						)}
-						keyExtractor={(item) => item.id}
-						ItemSeparatorComponent={Separator}
-						leftOpenValue={75}
-						rightOpenValue={-150}
-						previewRowKey={"0"}
-						previewOpenValue={-40}
-						previewOpenDelay={3000}
-					/>
-				)}
-			</SafeAreaView>
-		</ThemedView>
+		<NodeList
+			items={items}
+			listViewRef={(ref) => (listRef = ref)}
+			ListFooterComponent={showLoading ? loadingItemsItem : null}
+			onEndReached={loadMoreData}
+		></NodeList>
 	);
 };
 

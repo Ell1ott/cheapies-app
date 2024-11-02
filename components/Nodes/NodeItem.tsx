@@ -25,7 +25,7 @@ export type Item = {
 	nodeId: string;
 };
 
-const tagColors = {
+export const tagColors = {
 	expired: "bg-red-500",
 	longrunning: "bg-slate-600",
 	upcoming: "bg-blue-500",
@@ -94,15 +94,20 @@ const ItemWithImage = ({ item }: { item: Item }) => (
 	</Link>
 );
 
-export const NodeItem = ({ item }: { item: Item }) => {
-	return item.image ? (
-		<ItemWithImage item={item} />
-	) : (
-		<SimpleItem item={item} />
-	);
-};
+interface NodeItemProps {
+	item: Item;
+}
 
-export const MemoNodeItem = memo(NodeItem);
+export class NodeItem extends React.PureComponent<NodeItemProps> {
+	render() {
+		const { item } = this.props;
+		return item.image ? (
+			<ItemWithImage item={item} />
+		) : (
+			<SimpleItem item={item} />
+		);
+	}
+}
 
 const SimpleItem = ({ item }: { item: Item }) => (
 	<Pressable
