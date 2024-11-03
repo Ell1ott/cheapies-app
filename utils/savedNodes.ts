@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NodeInfo } from "./apiHandler/singleNodeParser";
 const loadState = async () => {
 	try {
-		const jsonState = await AsyncStorage.getItem("@app_state");
+		const jsonState = await AsyncStorage.getItem("@saved_nodes");
 		if (jsonState !== null) {
 			useSavedNodesStore.setState(JSON.parse(jsonState));
 		}
