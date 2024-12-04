@@ -15,7 +15,8 @@ export default function HomeScreen() {
 
 	useEffect(() => {
 		console.log("Saved Nodes:");
-		console.log(savedNodes);
+		console.log(Object.values(savedNodes)[0].titleElements);
+		
 	});
 	return (
 		<>
