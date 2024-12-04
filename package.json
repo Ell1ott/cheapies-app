@@ -9,7 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "windows": "npx @react-native-community/cli run-windows"
   },
   "jest": {
     "preset": "jest-expo"
@@ -38,7 +39,7 @@
     "nativewind": "^4.0.25",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.74.5",
+    "react-native": "^0.76.0",
     "react-native-element-dropdown": "^2.12.1",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-reanimated": "~3.10.1",
@@ -48,6 +49,7 @@
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-swipeable-list": "^0.1.2",
     "react-native-web": "~0.19.10",
+    "react-native-windows": "0.76.0",
     "tailwindcss": "^3.4.10",
     "zustand": "^5.0.0"
   },
@@ -61,7 +63,15 @@
     "jest-expo": "~51.0.3",
     "react-test-renderer": "18.2.0",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.3.3"
+    "typescript": "~5.3.3",
+    "metro-config": "^0.80.10"
   },
-  "private": true
+  "private": true,
+  "react-native-windows": {
+    "init-windows": {
+      "name": "CheapiesApp",
+      "namespace": "CheapiesApp",
+      "template": "old/uwp-cpp-app"
+    }
+  }
 }
