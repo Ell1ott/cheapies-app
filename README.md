@@ -34,11 +34,11 @@ To run the project locally:
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   bun i
    ```
 3. Run the app using Expo:
    ```bash
-   npm start
+   bun start
    ```
 
 You can use the app on a mobile device via the Expo Go app or run it in an emulator.
